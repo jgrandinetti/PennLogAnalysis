@@ -20,7 +20,7 @@ st.set_page_config(
 add_indentation()
 show_pages(
     [
-        Page("Home.py", "HOME"),
+        Page("main.py", "Home"),
 
 	# Chat Models
         # Section("Log Analysis"),
