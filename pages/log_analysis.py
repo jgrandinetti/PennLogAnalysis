@@ -2,6 +2,7 @@ from pylinac import load_log
 import streamlit as st
 import tempfile
 import shutil
+import matplotlib.pyplot as plt
 
 # Function to handle file upload; this function will be called only when the file is uploaded.
 def save_uploaded_file(uploaded_file):
