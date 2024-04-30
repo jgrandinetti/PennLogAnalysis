@@ -29,14 +29,40 @@ def plot_fluence_map():
         buf.seek(0)
         st.session_state.fluence_map = buf
 
+def plot_mu_calc():
+    if "uploaded_file" in st.session_state:
+        file = st.session_state.uploaded_file
+        with tempfile.NamedTemporaryFile(delete=False, suffix=file.name) as tmp_file:
+            shutil.copyfileobj(file, tmp_file)
+            tmp_file_path = tmp_file.name
+
+        anonymize(tmp_file_path)
+        log = load_log(tmp_file_path)
+
+        plt.figure()
+        log.axis_data.mu.plot_actual()
+        buf = BytesIO()
+        plt.savefig(buf, format='png')
+        plt.close()
+        buf.seek(0)
+        st.session_state.mu_calc = buf
+
+
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
 if "uploaded_file" not in st.session_state and uploaded_file is not None:
     save_uploaded_file(uploaded_file)
 
+# Fluence
 if "fluence_map" not in st.session_state:
     plot_fluence_map()
-
 if "fluence_map" in st.session_state:
     st.write("Fluence Map")
     st.image(st.session_state.fluence_map, caption='Fluence Map')
+    
+# MU Plot
+if "mu_calc" not in st.session_state:
+    plot_mu_calc()
+if "mu_calc" in st.session_state:
+    st.write("MU Actual")
+    st.image(st.session_state.mu_calc, caption='MU Actual')
