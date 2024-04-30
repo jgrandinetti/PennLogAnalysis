@@ -10,7 +10,7 @@ def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
         st.session_state.uploaded_file = uploaded_file
 
-def plot_fluence_map():
+def load_log_file():
     if "uploaded_file" in st.session_state:
         file = st.session_state.uploaded_file
         with tempfile.NamedTemporaryFile(delete=False, suffix=file.name) as tmp_file:
@@ -19,6 +19,11 @@ def plot_fluence_map():
 
         anonymize(tmp_file_path)
         log = load_log(tmp_file_path)
+        st.session_state.log = log
+
+def plot_fluence_map():
+    if "log" in st.session_state:
+        log = st.session_state.log
 
         plt.figure()
         log.fluence.actual.calc_map()
@@ -30,14 +35,8 @@ def plot_fluence_map():
         st.session_state.fluence_map = buf
 
 def plot_mu_calc():
-    if "uploaded_file" in st.session_state:
-        file = st.session_state.uploaded_file
-        with tempfile.NamedTemporaryFile(delete=False, suffix=file.name) as tmp_file:
-            shutil.copyfileobj(file, tmp_file)
-            tmp_file_path = tmp_file.name
-
-        anonymize(tmp_file_path)
-        log = load_log(tmp_file_path)
+    if "log" in st.session_state:
+        log = st.session_state.log
 
         plt.figure()
         log.axis_data.mu.plot_actual()
@@ -52,6 +51,9 @@ uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save
 
 if "uploaded_file" not in st.session_state and uploaded_file is not None:
     save_uploaded_file(uploaded_file)
+
+if "log" not in st.session_state:
+    load_log_file()
 
 # Fluence
 if "fluence_map" not in st.session_state:
