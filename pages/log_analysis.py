@@ -17,7 +17,7 @@ def save_uploaded_file(uploaded_file):
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
 if "uploaded_file" in st.session_state:
-    if "anonymized_content" not in st.session_state or "fluence_image" not in st.session_state:
+    if "fluence_image" not in st.session_state:
         file = st.session_state.uploaded_file
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=uploaded_file.name) as tmp_file:
@@ -25,10 +25,6 @@ if "uploaded_file" in st.session_state:
             tmp_file_path = tmp_file.name
 
         anonymize(tmp_file_path)
-
-        # Saving anonymized file content to session_state for persistence
-        with open(tmp_file_path, "rb") as anonymized_file:
-            st.session_state.anonymized_content = anonymized_file.read()
 
         log = load_log(tmp_file_path)
         log.fluence.actual.calc_map()
@@ -47,6 +43,3 @@ if "uploaded_file" in st.session_state:
     st.write("Fluence Map")
     fluence_image_data = st.session_state.fluence_image
     st.image(fluence_image_data, caption='Fluence Map')
-
-    # Note: If you want to save and deal with the anonymized file beyond displaying the image,
-    # you might need to store it differently depending on what you want to do with it.
