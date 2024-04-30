@@ -3,6 +3,7 @@ import streamlit as st
 import tempfile
 import shutil
 import matplotlib.pyplot as plt
+from io import BytesIO
 
 # Function to handle file upload; this function will be called only when the file is uploaded.
 def save_uploaded_file(uploaded_file):
@@ -33,6 +34,12 @@ if "uploaded_file" in st.session_state:
     log.fluence.actual.calc_map()
     # log.fluence.actual.plot_map()
 
-    fig, ax = plt.subplots()
-    log.fluence.actual.plot_map(ax=ax)
-    st.pyplot(fig)
+		plt.figure()  # Creates a new figure
+		log.fluence.actual.plot_map()  # This plots to the current figure
+		buf = BytesIO()  # Create a buffer to hold the image data
+		plt.savefig(buf, format='png')  # Save the current figure into the buffer in PNG format
+		plt.close()  # Close the plt figure to free memory
+		buf.seek(0)  # Seek to the start of the buffer
+		
+		# Display the plot
+		st.image(buf, caption='Fluence Map')
