@@ -30,4 +30,8 @@ if "uploaded_file" in st.session_state:
         
     log = load_log(tmp_file_path)
     log.fluence.actual.calc_map()
-    log.fluence.actual.plot_map()
+    # log.fluence.actual.plot_map()
+
+    fig, ax = plt.subplots()
+    log.fluence.actual.plot_map(ax=ax)
+    st.pyplot(fig)
