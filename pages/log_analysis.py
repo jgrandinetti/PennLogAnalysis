@@ -59,12 +59,12 @@ if "log" not in st.session_state:
 if "fluence_map" not in st.session_state:
     plot_fluence_map()
 if "fluence_map" in st.session_state:
-    st.write("Fluence Map")
+    # st.write("Fluence Map")
     st.image(st.session_state.fluence_map, caption='Fluence Map')
 
 # MU Plot
 if "mu_calc" not in st.session_state:
     plot_mu_calc()
 if "mu_calc" in st.session_state:
-    st.write("MU Actual")
+    # st.write("MU Actual")
     st.image(st.session_state.mu_calc, caption='MU Actual')
