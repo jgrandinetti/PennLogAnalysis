@@ -20,5 +20,5 @@ if "uploaded_file" in st.session_state:
     # You can now read the file or process it as required
     log = st.session_state.uploaded_file
     st.write("File uploaded successfully. File name:", log.name)
-	log.fluence.actual.calc_map()
-	log.fluence.actual.plot_map()
+    log.fluence.actual.calc_map()
+    log.fluence.actual.plot_map()
