@@ -25,34 +25,14 @@ if "uploaded_file" in st.session_state:
         tmp_file_path = tmp_file.name
 
     anonymize(tmp_file_path)
-
     log = load_log(tmp_file_path)
 
-    # Create a 2x2 grid of plots
-    fig, axs = plt.subplots(2, 2)  # This creates a figure and a 2x2 array of axes
-    fig.suptitle('Analysis Plots')
-
-    # Plot 1 (Original fluence map plot)
+    st.write("Fluence Map")
+    plt.figure()
     log.fluence.actual.calc_map()
-    log.fluence.actual.plot_map(ax=axs[0, 0])
-    axs[0, 0].set_title('Fluence Map')  # You can set individual titles for each subplot
-
-    # Plot 2 (Placeholder for your 2nd function)
-    # your_function_2(axs[0, 1])  # Replace with your actual function
-    axs[0, 1].set_title('Your Plot 2 Title')
-
-    # Plot 3 (Placeholder for your 3rd function)
-    # your_function_3(axs[1, 0])  # Replace with your actual function
-    axs[1, 0].set_title('Your Plot 3 Title')
-
-    # Plot 4 (Placeholder for your 4th function)
-    # your_function_4(axs[1, 1])  # Replace with your actual function
-    axs[1, 1].set_title('Your Plot 4 Title')
-
-    # Show the plots
+    log.fluence.actual.plot_map()
     buf = BytesIO()
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust the layout
     plt.savefig(buf, format='png')
     plt.close()
     buf.seek(0)
-    st.image(buf, caption='2x2 Analysis Plots')
+    st.image(buf, caption='Fluence Map')}
