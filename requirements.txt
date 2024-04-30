@@ -4,5 +4,3 @@ streamlit-lottie
 streamlit-extras
 st-pages
 pylinac
-tempfile
-shutil
