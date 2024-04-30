@@ -18,8 +18,14 @@ if "uploaded_file" not in st.session_state and uploaded_file is not None:
 if "uploaded_file" in st.session_state:
     # This means the file is already uploaded and is stored in session_state
     # You can now read the file or process it as required
-    log = st.session_state.uploaded_file
-    st.write("File uploaded successfully. File name:", log.name)
-    st.write(log)
-    # log.fluence.actual.calc_map()
-    # log.fluence.actual.plot_map()
+    file = st.session_state.uploaded_file
+    st.write("File uploaded successfully. File name:", file.name)
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=uploaded_file.name) as tmp_file:
+        # Copy the contents of the uploaded file to the temporary file
+        shutil.copyfileobj(uploaded_file, tmp_file)
+        tmp_file_path = tmp_file.name  # Store the temporary file path
+        
+    log = load_log(tmp_file_path)
+    log.fluence.actual.calc_map()
+    log.fluence.actual.plot_map()
