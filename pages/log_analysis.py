@@ -54,12 +54,12 @@ if "uploaded_file" not in st.session_state and uploaded_file is not None:
     save_uploaded_file(uploaded_file)
 
 # Fluence
-# if "fluence_map" not in st.session_state:
-#     plot_fluence_map()
-# if "fluence_map" in st.session_state:
-#     st.write("Fluence Map")
-#     st.image(st.session_state.fluence_map, caption='Fluence Map')
-    
+if "fluence_map" not in st.session_state:
+    plot_fluence_map()
+if "fluence_map" in st.session_state:
+    st.write("Fluence Map")
+    st.image(st.session_state.fluence_map, caption='Fluence Map')
+
 # MU Plot
 if "mu_calc" not in st.session_state:
     plot_mu_calc()
