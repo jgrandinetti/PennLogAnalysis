@@ -4,3 +4,4 @@ streamlit-lottie
 streamlit-extras
 st-pages
 pylinac
+matplotlib
