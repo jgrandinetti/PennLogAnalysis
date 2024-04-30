@@ -8,7 +8,7 @@ def save_uploaded_file(uploaded_file):
         st.session_state.uploaded_file = uploaded_file
 
 # Create a file uploader widget
-uploaded_file = st.file_uploader("Choose a file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
+uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
 # Using the 'uploaded_file' directly for first-time upload.
 # For subsequent accesses or page reruns, the file doesn't need to be re-uploaded and can be accessed from 'st.session_state'.
