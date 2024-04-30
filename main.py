@@ -16,6 +16,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+with open('style.css', 'r') as f:
+    css_to_apply = f.read()
 
 add_indentation()
 show_pages(
