@@ -1,0 +1,21 @@
+[theme]
+
+base = "dark" # light or dark
+
+# primaryColor = "#e74c3c" # red
+primaryColor = "#3377FF" # blue
+# primaryColor = "#fff" # white
+
+# primaryColor = "#0000FF"
+
+# backgroundColor = "#F6F4EB" # light background
+backgroundColor = "#21212A" # Dark background
+
+# secondaryBackgroundColor = "#f8c291"
+
+# textColor = "#fff"
+# textColor = "#231F21"
+font = "monospace" #monospace
+
+# [server]
+# maxUploadSize=30
