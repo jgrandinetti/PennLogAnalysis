@@ -27,3 +27,13 @@ show_pages(
         Page("pages/log_analysis.py", "Log Analysis", in_section=True),
     ]
 )
+
+
+
+st.markdown("""
+    <h1 style='text-align: center; font-size: 30px;'>Penn LINAC Dashboard</h1>
+    """, unsafe_allow_html=True)
+st.write(" ")
+st.write(" ")
+st.write(" ")
+st.write(" ")
