@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro'); 
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+html, body, p [class*="css"] {
+    font-family: 'Source Code Pro'
+    font-size: 18px;
+    font-weight: 500;
+    color: #231F21;
+}
+
+h1 [class*="css"] {
+    font-family: 'Montserrat'
+    font-size: 100px;
+    font-weight: 400;
+    color: #fff;
+}
