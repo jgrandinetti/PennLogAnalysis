@@ -34,12 +34,12 @@ if "uploaded_file" in st.session_state:
     log.fluence.actual.calc_map()
     # log.fluence.actual.plot_map()
 
-		plt.figure()  # Creates a new figure
-		log.fluence.actual.plot_map()  # This plots to the current figure
-		buf = BytesIO()  # Create a buffer to hold the image data
-		plt.savefig(buf, format='png')  # Save the current figure into the buffer in PNG format
-		plt.close()  # Close the plt figure to free memory
-		buf.seek(0)  # Seek to the start of the buffer
-		
-		# Display the plot
-		st.image(buf, caption='Fluence Map')
+	plt.figure()  # Creates a new figure
+	log.fluence.actual.plot_map()  # This plots to the current figure
+	buf = BytesIO()  # Create a buffer to hold the image data
+	plt.savefig(buf, format='png')  # Save the current figure into the buffer in PNG format
+	plt.close()  # Close the plt figure to free memory
+	buf.seek(0)  # Seek to the start of the buffer
+	
+	# Display the plot
+	st.image(buf, caption='Fluence Map')
