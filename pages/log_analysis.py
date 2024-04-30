@@ -18,5 +18,7 @@ if "uploaded_file" not in st.session_state and uploaded_file is not None:
 if "uploaded_file" in st.session_state:
     # This means the file is already uploaded and is stored in session_state
     # You can now read the file or process it as required
-    file = st.session_state.uploaded_file
-    st.write("File uploaded successfully. File name:", file.name)
+    log = st.session_state.uploaded_file
+    st.write("File uploaded successfully. File name:", log.name)
+	log.fluence.actual.calc_map()
+	log.fluence.actual.plot_map()
