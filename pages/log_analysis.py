@@ -35,4 +35,4 @@ if "uploaded_file" in st.session_state:
     plt.savefig(buf, format='png')
     plt.close()
     buf.seek(0)
-    st.image(buf, caption='Fluence Map')}
+    st.image(buf, caption='Fluence Map')
