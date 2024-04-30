@@ -1,46 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro'); 
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-html, body, p [class*="css"] {
+html, body, p, h2, h3, h4, h5, p, li, ul [class*="css"] {
     font-family: 'Source Code Pro'
-    font-size: 18px;
+    font-size: 16px !important;
     font-weight: 500;
     color: #231F21;
 }
 
 h1 [class*="css"] {
-    font-family: 'Montserrat'
+    font-family: 'Montserrat' !important;
     font-size: 100px;
-    font-weight: 400;
+    font-weight: 400 !important;
     color: #fff;
 }
 
-
-
-
-<style>
-
 footer {visibility: hidden;}
+
 .element-container st-emotion-cache-e8g64f e1f1d6gn3 {
-display: none !important; }
-
-body {
-  font-family: 'Source Code Pro';  
+display: none !important;
 }
-
-h2, h3, h4, h5, p, li, ul, body {
-  font-family: 'Source Code Pro';
-  font-weight: 500;
-  font-size: 16px !important;
-}
-
-h1 {
-  font-family: 'Montserrat';
-  font-weight: 400;
-}
-
-.appview-container-css-1wrcr25-ea3mdgi6 {
-  font-family: Source Code Pro; 
-}
-
-</style>
