@@ -78,13 +78,13 @@ def mu_calc_plot(mu, gantry):
                 "data": mu_list,
                 "type": "line",
                 "areaStyle": {},
-                "name": "Series 1"
+                "name": "MU"
             },
             {
                 "data": gantry_list,
                 "type": "line",
                 "yAxisIndex": 1,
-                "name": "Series 2"
+                "name": "Gantry Angle"
             }
         ],
         "legend": {
