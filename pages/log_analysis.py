@@ -106,21 +106,21 @@ def mu_calc_plot(mu, gantry):
                 "type": 'line'
             },
             "textStyle": {
-                "color": 'black'  # Set tooltip text color to dark for readability
+                "color": 'black'
             },
-            "backgroundColor": 'rgba(255, 255, 255, 0.8)',  # Light background for the tooltip
-            "borderColor": '#333',  # Border color for the tooltip
+            "backgroundColor": 'rgba(255, 255, 255, 0.9)',
+            "borderColor": '#333',
             "borderWidth": 1
         },
         "xAxis": {
             "type": "category",
             "data": x_labels,
             "axisLabel": {
-                "color": 'white'  # Set x-axis label color to white
+                "color": 'white'
             },
             "axisLine": {
                 "lineStyle": {
-                    "color": 'white'  # Set x-axis line color to white
+                    "color": 'white'
                 }
             }
         },
@@ -131,11 +131,11 @@ def mu_calc_plot(mu, gantry):
                 "nameLocation": "middle",
                 "nameGap": 50,
                 "axisLabel": {
-                    "color": 'white'  # Set y-axis label color to white
+                    "color": 'white'
                 },
                 "axisLine": {
                     "lineStyle": {
-                        "color": 'white'  # Set y-axis line color to white
+                        "color": 'white'
                     }
                 }
             },
@@ -146,11 +146,11 @@ def mu_calc_plot(mu, gantry):
                 "nameGap": 50,
                 "position": "right",
                 "axisLabel": {
-                    "color": 'white'  # Set y-axis label color to white
+                    "color": 'white'
                 },
                 "axisLine": {
                     "lineStyle": {
-                        "color": 'white'  # Set y-axis line color to white
+                        "color": 'white'
                     }
                 }
             }
@@ -159,7 +159,7 @@ def mu_calc_plot(mu, gantry):
             {
                 "data": mu_list,
                 "type": "line",
-                "showSymbol": False,  # Hide symbols on the line
+                "showSymbol": False,
                 "areaStyle": {},
                 "name": "MU",
                 "color": "#3498db"
@@ -167,7 +167,7 @@ def mu_calc_plot(mu, gantry):
             {
                 "data": gantry_list,
                 "type": "line",
-                "showSymbol": False,  # Hide symbols on the line
+                "showSymbol": False,
                 "yAxisIndex": 1,
                 "name": "Gantry Angle",
                 "color": "#e74c3c"
@@ -176,7 +176,7 @@ def mu_calc_plot(mu, gantry):
         "legend": {
             "data": ["MU", "Gantry Angle"],
             "textStyle": {
-                "color": 'white'  # Set legend text color to white
+                "color": 'white'
             }
         }
     }
