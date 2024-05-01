@@ -11,41 +11,18 @@ import streamlit_echarts as st_echarts
 
 
 # ------- Functions --------- #
-def plot_heatmap(data):
-    # Create the ECharts option
+def plot_heatmap():
     option = {
-        "xAxis": {"show": False},
-        "yAxis": {"show": False},
-        "visualMap": {
-            "show": False,
-            "min": int(data.min()),
-            "max": int(data.max()),
-            "inRange": {
-                "color": ["#000000", "#FFFFFF"]
-            }
+        "xAxis": {
+            "type": "category",
+            "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
-        "series": [{
-            "type": "heatmap",
-            "data": [],
-            "emphasis": {
-                "itemStyle": {
-                    "borderColor": "#333",
-                    "borderWidth": 1
-                }
-            },
-            "progressive": 1000,
-            "animation": False
-        }]
+        "yAxis": {"type": "value"},
+        "series": [{"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}],
     }
-
-    # Convert the NumPy array to the format required by ECharts
-    height, width = data.shape
-    for i in range(height):
-        for j in range(width):
-            option["series"][0]["data"].append([j, i, int(data[i, j])])
-
-    # Display the chart using Streamlit
-    st_echarts(option)
+    st_echarts(
+        options=option, height="400px",
+    )
 
 
 def save_uploaded_file(uploaded_file):
@@ -68,8 +45,7 @@ def plot_fluence_map():
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
         # plot_heatmap(fluence_array)
-        data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-        plot_heatmap(data)
+        plot_heatmap()
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
