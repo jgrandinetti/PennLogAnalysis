@@ -9,6 +9,7 @@ from io import BytesIO
 import plotly.express as px
 import numpy as np
 from streamlit_echarts import st_echarts
+from streamlit_echarts import st_pyecharts
 from pyecharts import options as opts
 from pyecharts.charts import Polar
 import math
