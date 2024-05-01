@@ -34,21 +34,43 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
 
 
 def create_polar_plot(monitor_units, gantry_angles):
-    polar = (
+    # polar = (
+    #     Polar()
+    #     .add(
+    #         "",
+    #         data=list(zip(gantry_angles, monitor_units)),
+    #         angle_data=gantry_angles,
+    #         type_="bar",
+    #         is_selected=False,
+    #     )
+    #     .set_global_opts(
+    #         title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle"),
+    #         polar_opts=opts.PolarOpts(radius="50%", center=["50%", "50%"]),
+    #     )
+    # )
+    # return polar
+
+    data = []
+    
+    for i in range(0, 101):
+        theta = i / 100 * 360
+        r = 5 * (1 + math.sin(theta / 180 * math.pi))
+        data.append([r, theta])
+    
+    (
         Polar()
-        .add(
-            "",
-            data=list(zip(gantry_angles, monitor_units)),
-            angle_data=gantry_angles,
-            type_="bar",
-            is_selected=False,
+        .add(series_name="line", data=data, label_opts=opts.LabelOpts(is_show=False))
+        .add_schema(
+            angleaxis_opts=opts.AngleAxisOpts(
+                start_angle=0, type_="value", is_clockwise=True
+            )
         )
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle"),
-            polar_opts=opts.PolarOpts(radius="50%", center=["50%", "50%"]),
+            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
+            title_opts=opts.TitleOpts(title="极坐标双数值轴"),
         )
+        .render("two_value_axes_in_polar.html")
     )
-    return polar
 
 
 
