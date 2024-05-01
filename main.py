@@ -27,6 +27,7 @@ show_pages(
 	# Chat Models
         # Section("Log Analysis"),
         Page("pages/log_analysis.py", "Log Analysis", in_section=True),
+        Page("pages/plot.py", "Plot Test", in_section=True),
     ]
 )
 
