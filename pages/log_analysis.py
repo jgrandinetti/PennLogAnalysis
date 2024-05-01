@@ -59,7 +59,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
 
     for ax, d, title in zip(axes, data, titles):
         # Display the heatmap
-        im = ax.imshow(d, cmap='hot', interpolation='nearest', aspect='equal')
+        im = ax.imshow(d, cmap='jet', interpolation='nearest', aspect='equal')
 
         # Set the aspect of the plot to be equal
         ax.set_aspect(aspect=(ncols / nrows))
