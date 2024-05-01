@@ -53,7 +53,7 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
         .add(series_name="Monitor Units Difference", data=data, label_opts=opts.LabelOpts(is_show=False))
         .add_schema(
             angleaxis_opts=opts.AngleAxisOpts(
-                start_angle=90, min_=0, max_=360, type_="value", is_clockwise=False,
+                start_angle=90, min_=0, max_=360, type_="value", is_clockwise=True,
                 interval=90, boundary_gap=False,
                 axistick_opts=opts.AxisTickOpts(is_show=False),
                 axislabel_opts=opts.LabelOpts(formatter="{value}°")
