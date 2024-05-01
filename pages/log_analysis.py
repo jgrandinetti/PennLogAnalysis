@@ -54,18 +54,21 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
     #     theta = round(gantry_angles[i], 2)
     #     r = round(monitor_units[i + step] - monitor_units[i], 2)
     #     data.append([r, theta])
-    data = []
+    
+    # data = []
+    # for i in range(0, len(gantry_angles) - step, step):
+    #     theta = round(sum(gantry_angles[i:i+step]) / step, 2)
+    #     r = sum(monitor_units[j+1] - monitor_units[j] for j in range(i, i + step))
+    #     r = round(r, 2)
+    #     data.append([r, theta])
 
-    # Iterate over the gantry_angles array with the specified step size
+    data = []
+    average_degree_change_per_index = sum(abs(gantry_angles[i+1] - gantry_angles[i]) for i in range(len(gantry_angles) - 1)) / (len(gantry_angles) - 1)
+    step = max(1, int(round(target_degree_change / average_degree_change_per_index)))
     for i in range(0, len(gantry_angles) - step, step):
-        # Calculate the average angle for the current segment for better representation
         theta = round(sum(gantry_angles[i:i+step]) / step, 2)
-        
-        # Sum the differences of monitor units within the current step interval
         r = sum(monitor_units[j+1] - monitor_units[j] for j in range(i, i + step))
-        r = round(r, 2)  # Round the result for cleaner display
-        
-        # Append the calculated values to the data list
+        r = round(r, 2)
         data.append([r, theta])
     
     c = (
