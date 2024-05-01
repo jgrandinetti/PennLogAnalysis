@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import plotly.subplots as sp
 from io import BytesIO
 import plotly.express as px
+import plotly.graph_objects as go
 import numpy as np
 from streamlit_echarts import st_echarts
 from streamlit_echarts import st_pyecharts
@@ -15,24 +16,46 @@ from pyecharts.charts import Polar
 import math
 
 
+# def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
+#     fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"))
+    
+#     trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", color_continuous_scale='jet')
+#     fig.add_trace(trace1.data[0], row=1, col=1)
+    
+#     # Plot expected fluence heatmap
+#     trace2 = px.imshow(expected_fluence, text_auto=True, aspect="square", color_continuous_scale="jet")
+#     fig.add_trace(trace2.data[0], row=1, col=2)
+    
+#     # Plot gamma heatmap
+#     trace3 = px.imshow(gamma, text_auto=True, aspect="square", color_continuous_scale="jet")
+#     fig.add_trace(trace3.data[0], row=1, col=3)
+    
+#     fig.update_layout(height=380, width=800, title_text="Heatmaps")
+#     st.plotly_chart(fig)
+
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
-    fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"))
-    
-    trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", color_continuous_scale='jet')
-    fig.add_trace(trace1.data[0], row=1, col=1)
-    
+    # Create a subplot
+    fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"),
+                           shared_yaxes=True, horizontal_spacing=0.02)
+
+    # Plot calculated fluence heatmap
+    trace1 = go.Heatmap(z=calculated_fluence, colorscale='Jet')
+    fig.add_trace(trace1, row=1, col=1)
+
     # Plot expected fluence heatmap
-    trace2 = px.imshow(expected_fluence, text_auto=True, aspect="square", color_continuous_scale="jet")
-    fig.add_trace(trace2.data[0], row=1, col=2)
-    
+    trace2 = go.Heatmap(z=expected_fluence, colorscale='Jet')
+    fig.add_trace(trace2, row=1, col=2)
+
     # Plot gamma heatmap
-    trace3 = px.imshow(gamma, text_auto=True, aspect="square", color_continuous_scale="jet")
-    fig.add_trace(trace3.data[0], row=1, col=3)
-    
+    trace3 = go.Heatmap(z=gamma, colorscale='Jet')
+    fig.add_trace(trace3, row=1, col=3)
+
+    # Update layout
     fig.update_layout(height=380, width=800, title_text="Heatmaps")
+    fig.update_traces(showscale=False)  # Optionally hide the color scale if not needed
+
+    # Display the figure in Streamlit
     st.plotly_chart(fig)
-
-
 
 
 def create_polar_plot(monitor_units, gantry_angles, step=10):
