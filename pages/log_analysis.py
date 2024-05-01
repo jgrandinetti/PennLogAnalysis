@@ -48,71 +48,49 @@ def plot_heatmap(data):
 
 
 
-def mu_calc_plot(data1, data2):
-    data_list1 = data1.tolist()
-    data_list2 = data2.tolist()
-    x_labels = list(range(1, len(data_list1) + 1))
+def mu_calc_plot(mu, gantry):
+    mu_list = mu.tolist()
+    gantry_list = gantry.tolist()
+    x_labels = list(range(1, len(mu_list) + 1))
 
     option = {
-        "dataset": [
-            {
-                "id": "dataset_raw",
-                "source": [
-                    ["Year"] + x_labels,
-                    ["Series 1"] + data_list1,
-                    ["Series 2"] + data_list2
-                ]
-            },
-            {
-                "id": "dataset_series_1",
-                "fromDatasetId": "dataset_raw",
-                "transform": {
-                    "type": "filter",
-                    "config": {"dimension": "Year", "gte": 1}
-                }
-            },
-            {
-                "id": "dataset_series_2",
-                "fromDatasetId": "dataset_raw",
-                "transform": {
-                    "type": "filter",
-                    "config": {"dimension": "Year", "gte": 1}
-                }
-            }
-        ],
         "xAxis": {
             "type": "category",
-            "nameLocation": "middle"
+            "data": x_labels,
         },
-        "yAxis": {
-            "name": "Value"
-        },
-        "series": [
+        "yAxis": [
             {
-                "type": "line",
-                "datasetId": "dataset_series_1",
-                "showSymbol": False,
-                "encode": {
-                    "x": "Year",
-                    "y": "Series 1",
-                    "itemName": "Year",
-                    "tooltip": ["Series 1"]
-                }
+                "type": "value",
+                "name": "MU",
+                "nameLocation": "middle",
+                "nameGap": 50
             },
             {
-                "type": "line",
-                "datasetId": "dataset_series_2",
-                "showSymbol": False,
-                "encode": {
-                    "x": "Year",
-                    "y": "Series 2",
-                    "itemName": "Year",
-                    "tooltip": ["Series 2"]
-                }
+                "type": "value",
+                "name": "Gantry Angle",
+                "nameLocation": "middle",
+                "nameGap": 50,
+                "position": "right"
             }
-        ]
+        ],
+        "series": [
+            {
+                "data": mu_list,
+                "type": "line",
+                "areaStyle": {},
+                "name": "MU"
+            },
+            {
+                "data": gantry_list,
+                "type": "line",
+                "yAxisIndex": 1,
+                "name": "Gantry Angle"
+            }
+        ],
+        "legend": {
+            "data": ["MU", "Gantry Angle"]
+        }
     }
-
     st_echarts(options=option, height="400px")
 
 
