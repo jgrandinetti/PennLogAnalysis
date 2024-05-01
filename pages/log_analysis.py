@@ -13,28 +13,9 @@ from streamlit_echarts import st_echarts
 from streamlit_echarts import st_pyecharts
 from pyecharts import options as opts
 from pyecharts.charts import Polar
-import math
 
-
-# def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
-#     fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"))
-    
-#     trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", color_continuous_scale='jet')
-#     fig.add_trace(trace1.data[0], row=1, col=1)
-    
-#     # Plot expected fluence heatmap
-#     trace2 = px.imshow(expected_fluence, text_auto=True, aspect="square", color_continuous_scale="jet")
-#     fig.add_trace(trace2.data[0], row=1, col=2)
-    
-#     # Plot gamma heatmap
-#     trace3 = px.imshow(gamma, text_auto=True, aspect="square", color_continuous_scale="jet")
-#     fig.add_trace(trace3.data[0], row=1, col=3)
-    
-#     fig.update_layout(height=380, width=800, title_text="Heatmaps")
-#     st.plotly_chart(fig)
 
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
-    # Create a subplot
     fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"),
                            shared_yaxes=True, horizontal_spacing=0.02)
 
@@ -42,7 +23,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     trace1 = go.Heatmap(
         z=calculated_fluence, 
         colorscale='Jet', 
-        hovertemplate='%{z}<extra></extra>'  # Display only z-value
+        hovertemplate='%{z}<extra></extra>'
     )
     fig.add_trace(trace1, row=1, col=1)
 
@@ -50,7 +31,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     trace2 = go.Heatmap(
         z=expected_fluence, 
         colorscale='Jet', 
-        hovertemplate='%{z}<extra></extra>'  # Display only z-value
+        hovertemplate='%{z}<extra></extra>'
     )
     fig.add_trace(trace2, row=1, col=2)
 
@@ -58,25 +39,17 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     trace3 = go.Heatmap(
         z=gamma, 
         colorscale='Jet', 
-        hovertemplate='%{z}<extra></extra>'  # Display only z-value
+        hovertemplate='%{z}<extra></extra>'
     )
     fig.add_trace(trace3, row=1, col=3)
 
-    # Update layout
     fig.update_layout(height=380, width=680, title_text="Heatmaps")
-    fig.update_traces(showscale=False)  # Optionally hide the color scale if not needed
-
-    # Display the figure in Streamlit
+    fig.update_traces(showscale=False)
     st.plotly_chart(fig)
 
 
 def create_polar_plot(monitor_units, gantry_angles, step=10):
     data = []
-    
-    # for i in range(0, len(gantry_angles), step):
-    #     theta = gantry_angles[i]
-    #     r = monitor_units[i]
-    #     data.append([r, theta])
 
     for i in range(0, len(gantry_angles) - step, step):
         theta = round(gantry_angles[i], 2)
@@ -196,8 +169,7 @@ def plot_fluence_map():
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
 
-        # st.write(f"Treatment type: {log.TreatmentType()}")
-        st.write(f"Patient Name: {log.header.mlc_model}")
+        st.write(f"sampling_interval: {log.header.sampling_interval}")
         
         log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
         st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
@@ -206,9 +178,7 @@ def plot_fluence_map():
 
         gamma_fluence_array = log.fluence.gamma.calc_map(distTA=1, doseTA=1, resolution=0.1)
         plot_heatmaps_to_buffer(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
-        # st.image(buffer, caption='Heatmaps of Fluence and Gamma')
-        # fig = px.imshow(fluence_array, aspect='equal')
-        # st.plotly_chart(fig)
+
 
 def plot_mu_calc():
     if "log" in st.session_state:
