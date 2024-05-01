@@ -9,6 +9,8 @@ from io import BytesIO
 import plotly.express as px
 import numpy as np
 from streamlit_echarts import st_echarts
+from pyecharts import options as opts
+from pyecharts.charts import Polar
 
 
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
