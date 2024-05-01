@@ -32,7 +32,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     fig.add_trace(trace3.data[0], row=1, col=3)
     
     fig.update_layout(height=380, width=800, title_text="Heatmaps")
-    st.plotly_chart(fig)}
+    st.plotly_chart(fig)
 
 
 
