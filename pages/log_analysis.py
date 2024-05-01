@@ -33,6 +33,25 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
 
 
 
+def create_polar_plot(monitor_units, gantry_angles):
+    polar = (
+        Polar()
+        .add(
+            "",
+            data=list(zip(gantry_angles, monitor_units)),
+            angle_data=gantry_angles,
+            type_="bar",
+            is_selected=False,
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle"),
+            polar_opts=opts.PolarOpts(radius="50%", center=["50%", "50%"]),
+        )
+    )
+    return polar
+
+
+
 def mu_calc_plot(mu, gantry):
     mu_list = mu.tolist()
     gantry_list = gantry.tolist()
@@ -128,6 +147,9 @@ def plot_mu_calc():
         mu_calc = log.axis_data.mu.actual
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
+        
+        polar_plot = create_polar_plot(mu_calc, gantry_angle)
+        st_pyecharts(polar_plot, height="500px")
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
