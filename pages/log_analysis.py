@@ -48,7 +48,7 @@ def plot_heatmap(data):
 
 
 
-def plot_mu_calc(data):
+def mu_calc_plot(data):
     option = {
         "xAxis": {
             "type": "category",
@@ -89,7 +89,7 @@ def plot_mu_calc():
     if "log" in st.session_state:
         log = st.session_state.log
         mu_calc = log.axis_data.mu.actual
-        plot_mu_calc(mu_calc)
+        mu_calc_plot(mu_calc)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
