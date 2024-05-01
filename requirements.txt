@@ -5,3 +5,5 @@ streamlit-extras
 st-pages
 pylinac
 matplotlib
+plotly
+numpy
