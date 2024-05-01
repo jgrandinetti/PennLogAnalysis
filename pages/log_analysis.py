@@ -111,6 +111,7 @@ def load_log_file():
         anonymize(tmp_file_path)
         log = load_log(tmp_file_path)
         st.session_state.log = log
+        st.write(f"Treatment type: {log.log_analyzer.TreatmentType()}")
 
 def plot_fluence_map():
     if "log" in st.session_state:
@@ -120,7 +121,7 @@ def plot_fluence_map():
 
         log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
         st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
-        log.fluence.gamma.calc_map(distTA=0.02, doseTA=0.02, resolution=0.1)
+        log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
         st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
 
         gamma_fluence_array = log.fluence.gamma.calc_map(distTA=1, doseTA=1, resolution=0.1)
