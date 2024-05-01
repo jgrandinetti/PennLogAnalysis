@@ -1,14 +1,11 @@
-from streamlit_echarts import st_echarts
+import plotly.express as px
 
-options = {
-    "xAxis": {
-        "type": "category",
-        "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    "yAxis": {"type": "value"},
-    "series": [
-        {"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}
-    ],
-}
-st_echarts(options=options)
+z = [[.1, .3, .5, .7, .9],
+     [1, .8, .6, .4, .2],
+     [.2, 0, .5, .7, .9],
+     [.9, .8, .4, .2, 0],
+     [.3, .4, .5, .7, 1]]
+
+fig = px.imshow(z, text_auto=True, aspect="auto")
+st.plotly_chart(fig)
 
