@@ -31,15 +31,14 @@ def plot_heatmap(data):
                 }
             },
             "progressive": 1000,
-            "animation": True
+            "animation": False
         }]
     }
 
     # Convert the NumPy array to the format required by ECharts
     height, width = data.shape
-    for i in range(height):
-        for j in range(width):
-            option["series"][0]["data"].append([j, height - i - 1, int(data[i, j])])
+    echarts_data = [[j, height - i - 1, int(data[i, j])] for i in range(height) for j in range(width)]
+    option["series"][0]["data"] = echarts_data
 
     st_echarts(options=option, height="600px")
 
