@@ -86,7 +86,7 @@ def create_polar_plot(monitor_units, gantry_angles, target_degree_change=1):
                 type_="value",
                 is_clockwise=True,
                 interval=90,
-                boundary_gap=False,
+                boundary_gap=True,
                 axistick_opts=opts.AxisTickOpts(is_show=False),
                 axislabel_opts=opts.LabelOpts(formatter="{value}°"),
             )
