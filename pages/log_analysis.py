@@ -26,24 +26,15 @@ def load_log_file():
 def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
-
-    # img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]],
-    #                 [[0, 255, 0], [0, 0, 255], [255, 0, 0]]
-    #                ], dtype=np.uint8)
-    fluence_array = log.fluence.actual.calc_map()
-    fig = px.imshow(fluence_array)
-    fig.update_layout(xaxis=dict(scaleanchor="y", constrain="domain"), yaxis=dict(constrain="domain"))
-    st.plotly_chart(fig)
-
-        # plt.figure()
-        # log.fluence.actual.calc_map()
-        # st.write(log.fluence.actual.calc_map())
-        # log.fluence.actual.plot_map()
-        # buf = BytesIO()
-        # plt.savefig(buf, format='png')
-        # plt.close()
-        # buf.seek(0)
-        # st.session_state.fluence_map = buf
+        fluence_array = log.fluence.actual.calc_map()
+        fig = px.imshow(fluence_array)
+        fig.update_layout(
+            xaxis=dict(scaleanchor="y", constrain="domain"),
+            yaxis=dict(constrain="domain"),
+            width=500,  # Adjust the width of the plot
+            height=500  # Adjust the height of the plot
+        )
+        st.plotly_chart(fig)
 
 def plot_mu_calc():
     if "log" in st.session_state:
@@ -57,7 +48,6 @@ def plot_mu_calc():
         buf.seek(0)
         st.session_state.mu_calc = buf
 
-
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
 if "uploaded_file" not in st.session_state and uploaded_file is not None:
@@ -67,15 +57,11 @@ if "log" not in st.session_state:
     load_log_file()
 
 # Fluence
-if "fluence_map" not in st.session_state:
+if "log" in st.session_state:
     plot_fluence_map()
-if "fluence_map" in st.session_state:
-    # st.write("Fluence Map")
-    st.image(st.session_state.fluence_map, caption='Fluence Map')
 
 # MU Plot
 if "mu_calc" not in st.session_state:
     plot_mu_calc()
 if "mu_calc" in st.session_state:
-    # st.write("MU Actual")
     st.image(st.session_state.mu_calc, caption='MU Actual')
