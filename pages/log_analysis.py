@@ -108,7 +108,7 @@ def load_log_file():
             shutil.copyfileobj(file, tmp_file)
             tmp_file_path = tmp_file.name
 
-        anonymize(tmp_file_path)
+        # anonymize(tmp_file_path)
         log = load_log(tmp_file_path)
         st.session_state.log = log
 
