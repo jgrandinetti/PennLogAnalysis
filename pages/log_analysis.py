@@ -17,6 +17,9 @@ def plot_heatmap(data):
             "show": True,
             "min": int(data.min()),
             "max": int(data.max()),
+            "orient": "vertical",
+            "left": "right",
+            "top": "middle",
             "inRange": {
                 "color": ["#000000", "#FFFFFF"]
             }
@@ -31,8 +34,12 @@ def plot_heatmap(data):
                 }
             },
             "progressive": 1000,
-            "animation": False
-        }]
+            "animation": True
+        }],
+        "tooltip": {
+            "trigger": "item",
+            "formatter": "Pixel Value: {c}"
+        }
     }
 
     # Convert the NumPy array to the format required by ECharts
