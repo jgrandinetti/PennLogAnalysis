@@ -169,8 +169,13 @@ def log_info():
         log = st.session_state.log
 
         st.write(" ")
+        st.write(" ")
         st.write("\n Log Information \n")
 
+        # No. of beams
+        st.write(f"No. of beams: {log.header.num_subbeams}")
+
+        # Treatment time
         samp_int = log.header.sampling_interval
         snaps = log.header.num_snapshots
         total_time = round(((samp_int * snaps) / 60000), 2)
