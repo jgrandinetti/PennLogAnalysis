@@ -171,11 +171,11 @@ def plot_fluence_map():
 
         samp_int = log.header.sampling_interval
         snaps = log.header.num_snapshots
-        total_time = samp_int * snaps
+        total_time = (samp_int * snaps) / 60000
         
-        st.write(f"sampling_interval: {log.header.sampling_interval}")
-        st.write(f"num_snapshots: {log.header.num_snapshots}")
-        st.write(f"Total time: {total_time}")
+        # st.write(f"sampling_interval: {log.header.sampling_interval}")
+        # st.write(f"num_snapshots: {log.header.num_snapshots}")
+        st.write(f"Total time: {total_time} min")
         
         log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
         st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
