@@ -95,7 +95,8 @@ def plot_fluence_map():
 def plot_mu_calc():
     if "log" in st.session_state:
         log = st.session_state.log
-        mu_calc = log.axis_data.mu.actual
+        # mu_calc = log.axis_data.mu.actual
+        mu_calc = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
