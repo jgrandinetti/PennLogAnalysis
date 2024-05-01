@@ -48,14 +48,14 @@ def plot_heatmap(data):
 
 
 
-def plot_heatmap(data):
+def plot_mu_calc(data):
     option = {
         "xAxis": {
             "type": "category",
             "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
         "yAxis": {"type": "value"},
-        "series": [{"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}],
+        "series": [{"data": data, "type": "line"}],
     }
     st_echarts(
         options=option, height="400px",
@@ -89,7 +89,7 @@ def plot_mu_calc():
     if "log" in st.session_state:
         log = st.session_state.log
         mu_calc = log.axis_data.mu.actual
-        st.write(mu_calc)
+        plot_mu_calc(mu_calc)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
