@@ -72,6 +72,8 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
         .set_global_opts(
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
             title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle"),
+            width="800px",  # Set the width of the plot
+            height="600px",  # Set the height of the plot
         )
     )
     st_pyecharts(c)
