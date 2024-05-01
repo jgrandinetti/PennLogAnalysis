@@ -183,7 +183,7 @@ def plot_fluence_map():
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
         gamma_fluence_array = log.fluence.gamma.calc_map(distTA=0.5, doseTA=1, resolution=0.1)
-        plot_heatmap(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
+        plot_heatmaps(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
