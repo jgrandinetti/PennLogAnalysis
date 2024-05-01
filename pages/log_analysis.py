@@ -228,7 +228,7 @@ def plot_mu_calc():
         mu_calc = log.axis_data.mu.actual
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
-        create_polar_plot(mu_calc, gantry_angle, target_degree_change=10)
+        create_polar_plot(mu_calc, gantry_angle, target_degree_change=2)
 
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
