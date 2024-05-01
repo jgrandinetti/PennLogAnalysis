@@ -51,20 +51,15 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
 def create_polar_plot(monitor_units, gantry_angles, target_degree_change=1):
     # data = []
     # for i in range(0, len(gantry_angles) - step, step):
-    #     theta = round(gantry_angles[i], 2)
-    #     r = round(monitor_units[i + step] - monitor_units[i], 2)
-    #     data.append([r, theta])
-    
-    # data = []
-    # for i in range(0, len(gantry_angles) - step, step):
     #     theta = round(sum(gantry_angles[i:i+step]) / step, 2)
     #     r = sum(monitor_units[j+1] - monitor_units[j] for j in range(i, i + step))
     #     r = round(r, 2)
     #     data.append([r, theta])
 
     data = []
-    average_degree_change_per_index = sum(abs(gantry_angles[i+1] - gantry_angles[i]) for i in range(len(gantry_angles) - 1)) / (len(gantry_angles) - 1)
-    step = max(1, int(round(target_degree_change / average_degree_change_per_index)))
+    # average_degree_change_per_index = sum(abs(gantry_angles[i+1] - gantry_angles[i]) for i in range(len(gantry_angles) - 1)) / (len(gantry_angles) - 1)
+    degree_change_per_index = 360 / (len(gantry_angles) - 1)
+    step = max(1, int(round(target_degree_change / degree_change_per_index)))
     for i in range(0, len(gantry_angles) - step, step):
         theta = round(sum(gantry_angles[i:i+step]) / step, 2)
         r = sum(monitor_units[j+1] - monitor_units[j] for j in range(i, i + step))
@@ -228,7 +223,7 @@ def plot_mu_calc():
         mu_calc = log.axis_data.mu.actual
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
-        create_polar_plot(mu_calc, gantry_angle, target_degree_change=2)
+        create_polar_plot(mu_calc, gantry_angle, target_degree_change=1)
 
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
