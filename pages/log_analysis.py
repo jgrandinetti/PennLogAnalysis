@@ -111,7 +111,7 @@ def load_log_file():
         anonymize(tmp_file_path)
         log = load_log(tmp_file_path)
         st.session_state.log = log
-        st.write(f"Treatment type: {log.log_analyzer.TreatmentType()}")
+        st.write(f"Treatment type: {log.TreatmentType()}")
 
 def plot_fluence_map():
     if "log" in st.session_state:
