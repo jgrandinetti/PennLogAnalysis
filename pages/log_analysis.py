@@ -49,8 +49,7 @@ def plot_heatmap(data):
     chart_height = height * 10
 
     # Display the chart using Streamlit
-    # st_echarts(option, height=chart_height, width=chart_width)
-    st_echarts(option)
+    st_echarts(option, height=chart_height, width=chart_width)
 
 
 def save_uploaded_file(uploaded_file):
@@ -72,7 +71,9 @@ def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
-        plot_heatmap(fluence_array)
+        # plot_heatmap(fluence_array)
+        data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        plot_heatmap(data)
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
