@@ -27,13 +27,7 @@ def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
-        fig = px.imshow(fluence_array)
-        fig.update_layout(
-            xaxis=dict(scaleanchor="y", constrain="domain"),
-            yaxis=dict(constrain="domain"),
-            width=500,  # Adjust the width of the plot
-            height=500  # Adjust the height of the plot
-        )
+        fig = px.imshow(fluence_array, aspect='equal')
         st.plotly_chart(fig)
 
 def plot_mu_calc():
