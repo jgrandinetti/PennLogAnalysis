@@ -168,7 +168,7 @@ def log_info():
     if "log" in st.session_state:
         log = st.session_state.log
 
-        st.write("\n Log Information \n")
+        st.write("\n\n\n Log Information \n")
 
         samp_int = log.header.sampling_interval
         snaps = log.header.num_snapshots
