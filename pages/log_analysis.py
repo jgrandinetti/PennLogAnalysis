@@ -163,24 +163,27 @@ def load_log_file():
         log = load_log(tmp_file_path)
         st.session_state.log = log
 
+
+def log_info():
+    if "log" in st.session_state:
+        log = st.session_state.log
+
+        samp_int = log.header.sampling_interval
+        snaps = log.header.num_snapshots
+        total_time = round(((samp_int * snaps) / 60000), 2)
+        st.write(f"Total time: {total_time} min")
+
+
 def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
 
-        samp_int = log.header.sampling_interval
-        snaps = log.header.num_snapshots
-        total_time = round(((samp_int * snaps) / 60000), 2)
-        
-        # st.write(f"sampling_interval: {log.header.sampling_interval}")
-        # st.write(f"num_snapshots: {log.header.num_snapshots}")
-        st.write(f"Total time: {total_time} min")
-        
-        log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
-        st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
-        log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
-        st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
+        # log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
+        # st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
+        # log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
+        # st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
 
         gamma_fluence_array = log.fluence.gamma.calc_map(distTA=1, doseTA=1, resolution=0.1)
         plot_heatmaps_to_buffer(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
@@ -210,6 +213,10 @@ if "uploaded_file" not in st.session_state and uploaded_file is not None:
 if "log" not in st.session_state:
     load_log_file()
 
+# Log Info
+if "log" in st.session_state:
+    log_info()
+
 # Fluence
 if "log" in st.session_state:
     plot_fluence_map()
@@ -217,5 +224,5 @@ if "log" in st.session_state:
 # MU Plot
 if "mu_calc" not in st.session_state:
     plot_mu_calc()
-if "mu_calc" in st.session_state:
-    st.image(st.session_state.mu_calc, caption='MU Actual')
+# if "mu_calc" in st.session_state:
+#     st.image(st.session_state.mu_calc, caption='MU Actual')
