@@ -7,3 +7,4 @@ pylinac
 matplotlib
 plotly
 numpy
+streamlit-echarts
