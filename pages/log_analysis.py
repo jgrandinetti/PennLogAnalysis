@@ -49,17 +49,27 @@ def plot_heatmap(data):
 
 
 def mu_calc_plot(data):
+    data_list = data.tolist()
+    x_labels = list(range(1, len(data_list) + 1))
+
     option = {
         "xAxis": {
             "type": "category",
-            "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            "data": x_labels,
+            "name": "Data Points",
+            "nameLocation": "middle",
+            "nameGap": 30
         },
-        "yAxis": {"type": "value"},
-        "series": [{"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}],
+        "yAxis": {
+            "type": "value",
+            "name": "Value",
+            "nameLocation": "middle",
+            "nameGap": 50
+        },
+        "series": [{"data": data_list, "type": "line"}],
     }
-    st_echarts(
-        options=option, height="400px",
-    )
+
+    st_echarts(options=option, height="400px")
 
 
 def save_uploaded_file(uploaded_file):
