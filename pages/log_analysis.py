@@ -118,7 +118,7 @@ def plot_fluence_map():
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
         
-        gamma_11 = log.fluence.gamma.calc_map(distTA=0.2, doseTA=0.2, resolution=0.1)
+        gamma_11 = log.fluence.gamma.calc_map(distTA=0.02, doseTA=0.02, resolution=0.1)
         st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
         gamma_22 = log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
         st.write(f"Gamma 2% / 2mm: {log.fluence.gamma.pass_prcnt}%")
