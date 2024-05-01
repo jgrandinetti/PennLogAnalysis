@@ -9,41 +9,102 @@ import plotly.express as px
 import numpy as np
 from streamlit_echarts import st_echarts
 
-def plot_heatmap(data):
-    option = {
-        "xAxis": {"show": False},
-        "yAxis": {"show": False},
+# def plot_heatmap(data):
+#     option = {
+#         "xAxis": {"show": False},
+#         "yAxis": {"show": False},
+#         "visualMap": {
+#             "show": True,
+#             "min": int(data.min()),
+#             "max": int(data.max()),
+#             "orient": "vertical",
+#             "left": "right",
+#             "top": "middle",
+#             "inRange": {
+#                 "color": ["#000000", "#FFFFFF"]
+#             }
+#         },
+#         "series": [{
+#             "type": "heatmap",
+#             "data": [],
+#             "emphasis": {
+#                 "itemStyle": {
+#                     "borderColor": "#333",
+#                     "borderWidth": 1
+#                 }
+#             },
+#             "progressive": 1000,
+#             "animation": True
+#         }],
+#     }
+
+#     # Convert the NumPy array to the format required by ECharts
+#     height, width = data.shape
+#     echarts_data = [[j, height - i - 1, int(data[i, j])] for i in range(height) for j in range(width)]
+#     option["series"][0]["data"] = echarts_data
+
+#     st_echarts(options=option, height="600px")
+
+
+def plot_heatmaps(calculated_fluence, expected_fluence, gamma):
+    options = {
+        "grid": [
+            {"left": '7%', "right": '55%', "top": '10%', "bottom": '10%'},
+            {"left": '35%', "right": '27%', "top": '10%', "bottom": '10%'},
+            {"left": '63%', "right": '7%', "top": '10%', "bottom": '10%'}
+        ],
         "visualMap": {
             "show": True,
-            "min": int(data.min()),
-            "max": int(data.max()),
-            "orient": "vertical",
-            "left": "right",
-            "top": "middle",
-            "inRange": {
-                "color": ["#000000", "#FFFFFF"]
-            }
+            "min": 0,
+            "max": 100,  # Adjust according to your data range
+            "calculable": True,
+            "orient": "horizontal",
+            "left": "center",
+            "bottom": "15%"
         },
-        "series": [{
-            "type": "heatmap",
-            "data": [],
-            "emphasis": {
-                "itemStyle": {
-                    "borderColor": "#333",
-                    "borderWidth": 1
-                }
+        "xAxis": [
+            {"gridIndex": 0, "show": False},
+            {"gridIndex": 1, "show": False},
+            {"gridIndex": 2, "show": False}
+        ],
+        "yAxis": [
+            {"gridIndex": 0, "show": False},
+            {"gridIndex": 1, "show": False},
+            {"gridIndex": 2, "show": False}
+        ],
+        "series": [
+            {
+                "name": "Calculated Fluence",
+                "type": "heatmap",
+                "data": convert_to_echarts_data(calculated_fluence),
+                "xAxisIndex": 0,
+                "yAxisIndex": 0,
+                "gridIndex": 0
             },
-            "progressive": 1000,
-            "animation": True
-        }],
+            {
+                "name": "Expected Fluence",
+                "type": "heatmap",
+                "data": convert_to_echarts_data(expected_fluence),
+                "xAxisIndex": 1,
+                "yAxisIndex": 1,
+                "gridIndex": 1
+            },
+            {
+                "name": "Gamma",
+                "type": "heatmap",
+                "data": convert_to_echarts_data(gamma),
+                "xAxisIndex": 2,
+                "yAxisIndex": 2,
+                "gridIndex": 2
+            }
+        ]
     }
 
-    # Convert the NumPy array to the format required by ECharts
-    height, width = data.shape
-    echarts_data = [[j, height - i - 1, int(data[i, j])] for i in range(height) for j in range(width)]
-    option["series"][0]["data"] = echarts_data
+    st_echarts(options=options, height="600px")
 
-    st_echarts(options=option, height="600px")
+def convert_to_echarts_data(data):
+    height, width = data.shape
+    return [[j, height - i - 1, int(data[i, j])] for i in range(height) for j in range(width)]
 
 
 
@@ -119,8 +180,10 @@ def load_log_file():
 def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
-        fluence_array = log.fluence.actual.calc_map()
-        # plot_heatmap(fluence_array)
+        calc_fluence_array = log.fluence.actual.calc_map()
+        expected_fluence_array = log.fluence.expected.calc_map()
+        gamma_fluence_array = log.fluence.gamma.calc_map(distTA=0.5, doseTA=1, resolution=0.1)
+        plot_heatmap(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
@@ -130,7 +193,6 @@ def plot_mu_calc():
         mu_calc = log.axis_data.mu.actual
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
-        st.write(log.fluence.expected.calc_map())
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
