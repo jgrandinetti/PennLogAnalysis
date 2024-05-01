@@ -66,7 +66,7 @@ def mu_calc_plot(data):
             "nameLocation": "middle",
             "nameGap": 50
         },
-        "series": [{"data": data_list, "type": "line"}],
+        "series": [{"data": data_list, "type": "line", "areaStyle": {}}],
     }
 
     st_echarts(options=option, height="400px")
