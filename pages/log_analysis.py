@@ -36,10 +36,6 @@ def plot_heatmap(data):
             "progressive": 1000,
             "animation": True
         }],
-        "tooltip": {
-            "trigger": "item",
-            "formatter": "Pixel Value: {c[2]}"
-        }
     }
 
     # Convert the NumPy array to the format required by ECharts
@@ -48,6 +44,23 @@ def plot_heatmap(data):
     option["series"][0]["data"] = echarts_data
 
     st_echarts(options=option, height="600px")
+
+
+
+
+def plot_heatmap(data):
+    option = {
+        "xAxis": {
+            "type": "category",
+            "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        },
+        "yAxis": {"type": "value"},
+        "series": [{"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}],
+    }
+    st_echarts(
+        options=option, height="400px",
+    )
+
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
@@ -68,22 +81,22 @@ def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
-        data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-        plot_heatmap(fluence_array)
+        # plot_heatmap(fluence_array)
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
 def plot_mu_calc():
     if "log" in st.session_state:
         log = st.session_state.log
-
-        plt.figure()
-        log.axis_data.mu.plot_actual()
-        buf = BytesIO()
-        plt.savefig(buf, format='png')
-        plt.close()
-        buf.seek(0)
-        st.session_state.mu_calc = buf
+        mu_calc = log.axis_data.mu.actual
+        st.write(mu_calc)
+        # plt.figure()
+        # log.axis_data.mu.plot_actual()
+        # buf = BytesIO()
+        # plt.savefig(buf, format='png')
+        # plt.close()
+        # buf.seek(0)
+        # st.session_state.mu_calc = buf
 
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
