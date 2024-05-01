@@ -16,7 +16,7 @@ def plot_heatmap(data):
     aspect_ratio = width / height
     
     # Set the chart size based on the aspect ratio
-    chart_width = 600
+    chart_width = 200
     chart_height = int(chart_width / aspect_ratio)
     
     option = {
