@@ -55,7 +55,7 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
             data=data,
             label_opts=opts.LabelOpts(is_show=False),
             symbol_size=0,
-            is_smooth=True,
+            type_=SeriesType.LINE,
         )
         .add_schema(
             angleaxis_opts=opts.AngleAxisOpts(
