@@ -185,7 +185,9 @@ def log_info():
         # MLC Info
         mlc_95 = round((log.axis_data.mlc.get_error_percentile(percentile=95)*100), 2)
         mlc_rms = round(log.axis_data.mlc.get_RMS_avg(), 4)
-        
+
+        st.write(f"Total Leaves: {log.axis_data.mlc.num_leaves}")
+        st.write(f"No. of leaves used: {log.axis_data.mlc.num_moving_leaves}")
         st.write(f"MLC 95% Error: {mlc_95}%")
         st.write(f"Avg. MLC RMS: {mlc_rms}")      
 
