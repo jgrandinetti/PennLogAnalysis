@@ -47,7 +47,6 @@ def plot_heatmap(data):
 
 
 
-
 def mu_calc_plot(mu, gantry):
     mu_list = mu.tolist()
     gantry_list = gantry.tolist()
@@ -78,13 +77,15 @@ def mu_calc_plot(mu, gantry):
                 "data": mu_list,
                 "type": "line",
                 "areaStyle": {},
-                "name": "MU"
+                "name": "MU",
+                "color": "#FF0000"  # Red color for the MU series
             },
             {
                 "data": gantry_list,
                 "type": "line",
                 "yAxisIndex": 1,
-                "name": "Gantry Angle"
+                "name": "Gantry Angle",
+                "color": "#0000FF"  # Blue color for the Gantry Angle series
             }
         ],
         "legend": {
