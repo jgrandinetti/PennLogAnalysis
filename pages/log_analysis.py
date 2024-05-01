@@ -80,12 +80,6 @@ def mu_calc_plot(data1, data2):
                 }
             }
         ],
-        "title": {
-            "text": "Stacked Line Chart"
-        },
-        "tooltip": {
-            "trigger": "axis"
-        },
         "xAxis": {
             "type": "category",
             "nameLocation": "middle"
