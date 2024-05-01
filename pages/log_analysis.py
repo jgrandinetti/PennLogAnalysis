@@ -173,7 +173,7 @@ def plot_mu_calc():
         mu_calc_plot(mu_calc, gantry_angle)
         
         polar_plot = create_polar_plot(mu_calc, gantry_angle)
-        st_pyecharts(polar_plot, height="500px")
+        st_pyecharts(polar_plot)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
