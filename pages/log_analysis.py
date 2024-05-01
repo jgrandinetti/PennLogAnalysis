@@ -48,7 +48,7 @@ def plot_heatmap(data):
 
 
 
-def mu_calc_plot(data):
+def mu_calc_plot(data1, data2):
     data_list1 = data1.tolist()
     data_list2 = data2.tolist()
     x_labels = list(range(1, len(data_list1) + 1))
