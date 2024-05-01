@@ -44,8 +44,8 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
     #     data.append([r, theta])
 
     for i in range(0, len(gantry_angles) - step, step):
-        theta = gantry_angles[i]
-        r = monitor_units[i + step] - monitor_units[i]
+        theta = round(gantry_angles[i], 2)
+        r = round(monitor_units[i + step] - monitor_units[i], 2)
         data.append([r, theta])
     
     c = (
@@ -81,6 +81,10 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
 def mu_calc_plot(mu, gantry):
     mu_list = mu.tolist()
     gantry_list = gantry.tolist()
+    
+    mu_list = [round(value, 2) for value in mu_list]
+    gantry_list = [round(value, 2) for value in gantry_list]
+    
     x_labels = list(range(1, len(mu_list) + 1))
 
     option = {
