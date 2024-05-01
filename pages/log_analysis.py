@@ -48,8 +48,8 @@ def plot_heatmap(data):
 
 
 
-def plot_mu_calc(data):
-    data_list = data.tolist()
+def plot_mu_calc(mu_data):
+    data_list = mu_data.tolist()
     x_labels = list(range(1, len(data_list) + 1))
 
     option = {
