@@ -61,7 +61,7 @@ def plot_heatmap(data):
     chart_height = 500  # You can adjust this value based on your preference
     chart_width = int(chart_height / aspect_ratio)
 
-    st_echarts(options=option, height=f"{chart_height}px", width=f"{chart_width}px")
+    st_echarts(options=option)
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
