@@ -35,10 +35,10 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
 
 
 
-def create_polar_plot(monitor_units, gantry_angles):
+def create_polar_plot(monitor_units, gantry_angles, step=10):
     data = []
     
-    for i in range(len(gantry_angles)):
+    for i in range(0, len(gantry_angles), step):
         theta = gantry_angles[i]
         r = monitor_units[i]
         data.append([r, theta])
@@ -156,7 +156,7 @@ def plot_mu_calc():
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
         
-        create_polar_plot(mu_calc, gantry_angle)
+        create_polar_plot(mu_calc, gantry_angle, step=10)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
