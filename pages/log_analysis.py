@@ -5,7 +5,6 @@ import tempfile
 import shutil
 import matplotlib.pyplot as plt
 import plotly.subplots as sp
-import plotly.graph_objects as go
 from io import BytesIO
 import plotly.express as px
 import numpy as np
@@ -17,29 +16,23 @@ import math
 
 
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
-    # Create a subplot
-    fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"),
-                           vertical_spacing=0.1, horizontal_spacing=0.1)
-
+    fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"))
+    
+    Raw code
     # Plot calculated fluence heatmap
-    trace1 = go.Heatmap(z=calculated_fluence, colorscale='Jet')
-    fig.add_trace(trace1, row=1, col=1)
-
+    trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", color_continuous_scale="jet")
+    fig.add_trace(trace1.data[0], row=1, col=1)
+    
     # Plot expected fluence heatmap
-    trace2 = go.Heatmap(z=expected_fluence, colorscale='Jet')
-    fig.add_trace(trace2, row=1, col=2)
-
+    trace2 = px.imshow(expected_fluence, text_auto=True, aspect="square", color_continuous_scale="jet")
+    fig.add_trace(trace2.data[0], row=1, col=2)
+    
     # Plot gamma heatmap
-    trace3 = go.Heatmap(z=gamma, colorscale='Jet')
-    fig.add_trace(trace3, row=1, col=3)
-
-    # Update layout
-    fig.update_layout(height=380, width=800, title_text="Heatmaps", coloraxis=dict(colorscale='Jet'), showlegend=False)
-    fig.update_xaxes(showticklabels=False)
-    fig.update_yaxes(showticklabels=False)
-
-    # Display the figure in Streamlit
-    st.plotly_chart(fig)
+    trace3 = px.imshow(gamma, text_auto=True, aspect="square", color_continuous_scale="jet")
+    fig.add_trace(trace3.data[0], row=1, col=3)
+    
+    fig.update_layout(height=380, width=800, title_text="Heatmaps")
+    st.plotly_chart(fig)}
 
 
 
