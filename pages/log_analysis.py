@@ -57,18 +57,13 @@ def create_polar_plot(monitor_units, gantry_angles, target_degree_change=1):
     #     data.append([r, theta])
 
     data = []
-    total_mu = 0
-    # average_degree_change_per_index = sum(abs(gantry_angles[i+1] - gantry_angles[i]) for i in range(len(gantry_angles) - 1)) / (len(gantry_angles) - 1)
     degree_change_per_index = 360 / (len(gantry_angles) - 1)
     step = max(1, int(round(target_degree_change / degree_change_per_index)))
     for i in range(0, len(gantry_angles) - step, step):
         theta = round(sum(gantry_angles[i:i+step]) / step, 2)
         r = sum(monitor_units[j+1] - monitor_units[j] for j in range(i, i + step))
         r = round(r, 2)
-        total_mu += r
         data.append([r, theta])
-
-    st.write(total_mu)
     
     c = (
         Polar()
@@ -143,6 +138,7 @@ def mu_calc_plot(mu, gantry):
             {
                 "data": mu_list,
                 "type": "line",
+                "showSymbol": False,  # Hide symbols on the line
                 "areaStyle": {},
                 "name": "MU",
                 "color": "#3498db"
@@ -150,6 +146,7 @@ def mu_calc_plot(mu, gantry):
             {
                 "data": gantry_list,
                 "type": "line",
+                "showSymbol": False,  # Hide symbols on the line
                 "yAxisIndex": 1,
                 "name": "Gantry Angle",
                 "color": "#e74c3c"
@@ -160,6 +157,7 @@ def mu_calc_plot(mu, gantry):
         }
     }
     st_echarts(options=option, height="400px")
+
 
 
 def save_uploaded_file(uploaded_file):
