@@ -47,7 +47,7 @@ from streamlit_echarts import st_echarts
 
 
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))  # Adjust figsize to give more space
 
     # Titles for each subplot
     titles = ['Calculated Fluence', 'Expected Fluence', 'Gamma']
@@ -56,16 +56,14 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     data = [calculated_fluence, expected_fluence, gamma]
 
     for ax, d, title in zip(axes, data, titles):
-        heatmap = ax.imshow(d, cmap='hot', interpolation='nearest')
+        # Ensure aspect ratio is equal and use 'auto' to adjust axes limits
+        heatmap = ax.imshow(d, cmap='hot', interpolation='nearest', aspect='equal')
         ax.set_title(title)
-        ax.set_aspect('equal', 'box')
         fig.colorbar(heatmap, ax=ax)
 
-    plt.tight_layout()
-
-    # Save to buffer
+    plt.tight_layout()  # Adjust layout to make sure nothing is cut off
     buf = BytesIO()
-    plt.savefig(buf, format='png')
+    plt.savefig(buf, format='png', bbox_inches='tight')  # Ensure the whole plot is saved
     plt.close()
     buf.seek(0)
 
