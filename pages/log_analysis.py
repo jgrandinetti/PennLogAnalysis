@@ -4,6 +4,7 @@ import streamlit as st
 import tempfile
 import shutil
 import matplotlib.pyplot as plt
+import plotly.subplots as sp
 from io import BytesIO
 import plotly.express as px
 import numpy as np
