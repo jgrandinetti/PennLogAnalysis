@@ -172,9 +172,6 @@ def mu_calc_plot(mu, gantry):
         ],
         "legend": {
             "data": ["MU", "Gantry Angle"],
-            "textStyle": {
-                "color": 'white'  # Set legend text color to white
-            }
         }
     }
     st_echarts(options=option, height="400px")
