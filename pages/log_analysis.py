@@ -71,7 +71,6 @@ def create_polar_plot(monitor_units, gantry_angles):
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
             title_opts=opts.TitleOpts(title="极坐标双数值轴"),
         )
-        .render("two_value_axes_in_polar.html")
     )
     st_pyecharts(c)
 
