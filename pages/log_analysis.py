@@ -27,32 +27,14 @@ def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
-        
-        # Calculate the aspect ratio of the fluence array
-        aspect_ratio = fluence_array.shape[1] / fluence_array.shape[0]
-        
-        # Create a figure with equal aspect ratio
-        fig = plt.figure(figsize=(8, 8 / aspect_ratio))
-        ax = fig.add_subplot(111)
-        
-        # Plot the fluence array using imshow
-        im = ax.imshow(fluence_array, cmap='viridis', aspect='equal')
-        
-        # Add a colorbar
-        plt.colorbar(im)
-        
-        # Remove the axes ticks
-        ax.set_xticks([])
-        ax.set_yticks([])
-        
-        # Convert the plot to PNG format
-        buf = BytesIO()
-        plt.savefig(buf, format='png', bbox_inches='tight')
-        plt.close(fig)
-        buf.seek(0)
-        
-        # Display the plot using Streamlit
-        st.image(buf, use_column_width=True)
+        fig = px.imshow(fluence_array)
+        fig.update_layout(
+            xaxis=dict(scaleanchor="y", constrain="domain"),
+            yaxis=dict(constrain="domain"),
+            width=500,  # Adjust the width of the plot
+            height=500  # Adjust the height of the plot
+        )
+        st.plotly_chart(fig)
 
 def plot_mu_calc():
     if "log" in st.session_state:
