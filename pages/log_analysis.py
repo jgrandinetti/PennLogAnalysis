@@ -130,6 +130,7 @@ def plot_mu_calc():
         mu_calc = log.axis_data.mu.actual
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
+        st.write(log.fluence.expected.calc_map())
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
