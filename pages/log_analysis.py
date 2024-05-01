@@ -58,6 +58,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     for ax, d, title in zip(axes, data, titles):
         heatmap = ax.imshow(d, cmap='hot', interpolation='nearest')
         ax.set_title(title)
+        ax.set_aspect('equal', 'box')
         fig.colorbar(heatmap, ax=ax)
 
     plt.tight_layout()
