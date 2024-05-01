@@ -7,6 +7,6 @@ z = [[.1, .3, .5, .7, .9],
      [.9, .8, .4, .2, 0],
      [.3, .4, .5, .7, 1]]
 
-fig = px.imshow(z, text_auto=True, aspect="auto")
+fig = px.imshow(z, text_auto=True)
 st.plotly_chart(fig)
 
