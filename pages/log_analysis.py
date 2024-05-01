@@ -19,7 +19,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"),
                            shared_yaxes=True, horizontal_spacing=0.02)
 
-    # Plot calculated fluence heatmap
+    # Plot calculated fluence
     trace1 = go.Heatmap(
         z=calculated_fluence, 
         colorscale='Jet', 
@@ -27,7 +27,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     )
     fig.add_trace(trace1, row=1, col=1)
 
-    # Plot expected fluence heatmap
+    # Plot expected fluence
     trace2 = go.Heatmap(
         z=expected_fluence, 
         colorscale='Jet', 
@@ -35,7 +35,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     )
     fig.add_trace(trace2, row=1, col=2)
 
-    # Plot gamma heatmap
+    # Plot gamma
     trace3 = go.Heatmap(
         z=gamma, 
         colorscale='Jet', 
@@ -103,7 +103,7 @@ def mu_calc_plot(mu, gantry):
         "tooltip": {
             "trigger": 'axis',
             "axisPointer": {
-                "type": 'line'  # Shows a vertical line across the chart when hovering
+                "type": 'line'
             }
         },
         "xAxis": {
@@ -213,15 +213,7 @@ def plot_mu_calc():
         mu_calc = log.axis_data.mu.actual
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
-        
         create_polar_plot(mu_calc, gantry_angle, step=25)
-        # plt.figure()
-        # log.axis_data.mu.plot_actual()
-        # buf = BytesIO()
-        # plt.savefig(buf, format='png')
-        # plt.close()
-        # buf.seek(0)
-        # st.session_state.mu_calc = buf
 
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
@@ -242,5 +234,3 @@ if "log" in st.session_state:
 # MU Plot
 if "mu_calc" not in st.session_state:
     plot_mu_calc()
-# if "mu_calc" in st.session_state:
-#     st.image(st.session_state.mu_calc, caption='MU Actual')
