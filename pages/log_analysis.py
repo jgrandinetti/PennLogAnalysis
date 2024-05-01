@@ -156,7 +156,7 @@ def plot_mu_calc():
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
         
-        create_polar_plot(mu_calc, gantry_angle, step=10)
+        create_polar_plot(mu_calc, gantry_angle, step=100)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
