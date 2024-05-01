@@ -111,7 +111,6 @@ def load_log_file():
         anonymize(tmp_file_path)
         log = load_log(tmp_file_path)
         st.session_state.log = log
-        st.write(f"Treatment type: {log.TreatmentType()}")
 
 def plot_fluence_map():
     if "log" in st.session_state:
@@ -119,6 +118,9 @@ def plot_fluence_map():
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
 
+        st.write(f"Treatment type: {log.TreatmentType}")
+        st.write(f"Patient Name: {log.header.patient_name}")
+        
         log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
         st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
         log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
