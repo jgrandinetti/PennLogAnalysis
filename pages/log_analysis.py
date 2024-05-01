@@ -183,7 +183,8 @@ def log_info():
         st.write(f"Total time: {total_time} min")
 
         # MLC Errors
-        st.write(f"MLC 95% Error: {log.axis_data.mlc.get_error_percentile(percentile=95)}")
+        mlc_95 = round((log.axis_data.mlc.get_error_percentile(percentile=95)*100), 2)
+        st.write(f"MLC 95% Error: {mlc_95}%")
 
 
 def plot_fluence_map():
