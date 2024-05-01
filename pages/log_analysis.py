@@ -106,8 +106,11 @@ def mu_calc_plot(mu, gantry):
                 "type": 'line'
             },
             "textStyle": {
-                "color": 'white'  # Set tooltip text color to white
-            }
+                "color": 'black'  # Set tooltip text color to dark for readability
+            },
+            "backgroundColor": 'rgba(255, 255, 255, 0.8)',  # Light background for the tooltip
+            "borderColor": '#333',  # Border color for the tooltip
+            "borderWidth": 1
         },
         "xAxis": {
             "type": "category",
@@ -172,9 +175,13 @@ def mu_calc_plot(mu, gantry):
         ],
         "legend": {
             "data": ["MU", "Gantry Angle"],
+            "textStyle": {
+                "color": 'white'  # Set legend text color to white
+            }
         }
     }
     st_echarts(options=option, height="400px")
+
 
 
 
