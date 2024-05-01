@@ -44,12 +44,8 @@ def plot_heatmap(data):
         for j in range(width):
             option["series"][0]["data"].append([j, i, int(data[i, j])])
 
-    # Set the chart width and height based on the data dimensions
-    chart_width = width * 10
-    chart_height = height * 10
-
     # Display the chart using Streamlit
-    st_echarts(option, height=chart_height, width=chart_width)
+    st_echarts(option)
 
 
 def save_uploaded_file(uploaded_file):
