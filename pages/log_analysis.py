@@ -14,7 +14,7 @@ def plot_heatmap(data):
         "xAxis": {"show": False},
         "yAxis": {"show": False},
         "visualMap": {
-            "show": False,
+            "show": True,
             "min": int(data.min()),
             "max": int(data.max()),
             "inRange": {
