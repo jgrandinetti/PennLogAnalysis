@@ -51,10 +51,9 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     fig.add_trace(trace3, row=1, col=3)
 
     # Update layout
-    fig.update_layout(height=380, width=800, title_text="Heatmaps")
-    # fig.update_traces(showscale=False)  # Optionally hide the color scale if not needed
+    fig.update_layout(height=380, width=600, title_text="Heatmaps")
+    fig.update_traces(showscale=False)
 
-    # Display the figure in Streamlit
     st.plotly_chart(fig)
 
 
