@@ -58,7 +58,7 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
             tooltip_opts=opts.TooltipOpts(
             formatter="{a}<br/>Monitor Units: {c}"
             ),
-            itemstyle_opts=opts.ItemStyleOpts(color="blue", border_width=2),
+            itemstyle_opts=opts.ItemStyleOpts(color="#3498db", border_width=3),
         )
         .add_schema(
             angleaxis_opts=opts.AngleAxisOpts(
