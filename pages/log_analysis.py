@@ -5,6 +5,8 @@ import tempfile
 import shutil
 import matplotlib.pyplot as plt
 from io import BytesIO
+import plotly.express as px
+import numpy as np
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
@@ -25,15 +27,22 @@ def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
 
-        plt.figure()
-        log.fluence.actual.calc_map()
-        st.write(log.fluence.actual.calc_map())
-        log.fluence.actual.plot_map()
-        buf = BytesIO()
-        plt.savefig(buf, format='png')
-        plt.close()
-        buf.seek(0)
-        st.session_state.fluence_map = buf
+    # img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]],
+    #                 [[0, 255, 0], [0, 0, 255], [255, 0, 0]]
+    #                ], dtype=np.uint8)
+    fluence_array = log.fluence.actual.calc_map()
+    fig = px.imshow(fluence_array)
+    st.plotly_chart(fig)
+
+        # plt.figure()
+        # log.fluence.actual.calc_map()
+        # st.write(log.fluence.actual.calc_map())
+        # log.fluence.actual.plot_map()
+        # buf = BytesIO()
+        # plt.savefig(buf, format='png')
+        # plt.close()
+        # buf.seek(0)
+        # st.session_state.fluence_map = buf
 
 def plot_mu_calc():
     if "log" in st.session_state:
