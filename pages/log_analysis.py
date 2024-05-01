@@ -27,9 +27,9 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     
     # Plot gamma heatmap
     trace3 = px.imshow(gamma, text_auto=True, aspect="square", color_continuous_scale="jet")
-    fig.add_trace(trace3.data[0], row=1, col=3)
+    fig.add_trace(trace3.data[0], row=1, col=3, color_continuous_scale='jet')
     
-    fig.update_layout(height=380, width=800, title_text="Heatmaps", color_continuous_scale='jet')
+    fig.update_layout(height=380, width=800, title_text="Heatmaps")
     st.plotly_chart(fig)
 
 
