@@ -49,11 +49,23 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
 
 
 def create_polar_plot(monitor_units, gantry_angles, step=10):
+    # data = []
+    # for i in range(0, len(gantry_angles) - step, step):
+    #     theta = round(gantry_angles[i], 2)
+    #     r = round(monitor_units[i + step] - monitor_units[i], 2)
+    #     data.append([r, theta])
     data = []
 
+    # Iterate over the gantry_angles array with the specified step size
     for i in range(0, len(gantry_angles) - step, step):
-        theta = round(gantry_angles[i], 2)
-        r = round(monitor_units[i + step] - monitor_units[i], 2)
+        # Calculate the average angle for the current segment for better representation
+        theta = round(sum(gantry_angles[i:i+step]) / step, 2)
+        
+        # Sum the differences of monitor units within the current step interval
+        r = sum(monitor_units[j+1] - monitor_units[j] for j in range(i, i + step))
+        r = round(r, 2)  # Round the result for cleaner display
+        
+        # Append the calculated values to the data list
         data.append([r, theta])
     
     c = (
