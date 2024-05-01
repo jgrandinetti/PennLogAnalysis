@@ -39,21 +39,22 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
                            shared_yaxes=True, horizontal_spacing=0.02)
 
     # Plot calculated fluence heatmap
-    trace1 = go.Heatmap(z=calculated_fluence, colorscale='Jet')
+    trace1 = go.Heatmap(z=calculated_fluence, colorscale='Jet', hoverinfo='none')
     fig.add_trace(trace1, row=1, col=1)
 
     # Plot expected fluence heatmap
-    trace2 = go.Heatmap(z=expected_fluence, colorscale='Jet')
+    trace2 = go.Heatmap(z=expected_fluence, colorscale='Jet', hoverinfo='none')
     fig.add_trace(trace2, row=1, col=2)
 
     # Plot gamma heatmap
-    trace3 = go.Heatmap(z=gamma, colorscale='Jet')
+    trace3 = go.Heatmap(z=gamma, colorscale='Jet', hoverinfo='none')
     fig.add_trace(trace3, row=1, col=3)
 
     # Update layout
-    fig.update_layout(height=380, width=700, title_text="Heatmaps")
-    fig.update_traces(showscale=False)
+    fig.update_layout(height=380, width=800, title_text="Heatmaps")
+    fig.update_traces(showscale=False)  # Optionally hide the color scale if not needed
 
+    # Display the figure in Streamlit
     st.plotly_chart(fig)
 
 
