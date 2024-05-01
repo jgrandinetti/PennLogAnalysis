@@ -41,7 +41,7 @@ def plot_heatmap(data):
         for j in range(width):
             option["series"][0]["data"].append([j, height - i - 1, int(data[i, j])])
 
-    st_echarts(options=option, height="400px")
+    st_echarts(options=option, height="600px")
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
