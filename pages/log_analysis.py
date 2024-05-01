@@ -56,13 +56,10 @@ def mu_calc_plot(data):
         "xAxis": {
             "type": "category",
             "data": x_labels,
-            "name": "Data Points",
-            "nameLocation": "middle",
-            "nameGap": 30
         },
         "yAxis": {
             "type": "value",
-            "name": "Value",
+            "name": "MU",
             "nameLocation": "middle",
             "nameGap": 50
         },
