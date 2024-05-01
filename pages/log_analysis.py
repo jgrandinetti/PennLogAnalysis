@@ -171,7 +171,7 @@ def plot_fluence_map():
 
         samp_int = log.header.sampling_interval
         snaps = log.header.num_snapshots
-        total_time = (samp_int * snaps) / 60000
+        total_time = round(((samp_int * snaps) / 60000), 2)
         
         # st.write(f"sampling_interval: {log.header.sampling_interval}")
         # st.write(f"num_snapshots: {log.header.num_snapshots}")
