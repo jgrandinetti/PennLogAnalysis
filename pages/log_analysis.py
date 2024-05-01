@@ -117,10 +117,15 @@ def plot_fluence_map():
         log = st.session_state.log
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
-        gamma_fluence_array = log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
-
-        st.write(f"Gamma Passing Rate: {log.fluence.gamma.pass_prcnt}%")
         
+        gamma_11 = log.fluence.gamma.calc_map(distTA=1, doseTA=1, resolution=0.1)
+        st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
+        gamma_22 = log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
+        st.write(f"Gamma 2% / 2mm: {log.fluence.gamma.pass_prcnt}%")
+        gamma_33 = log.fluence.gamma.calc_map(distTA=3, doseTA=3, resolution=0.1)
+        st.write(f"Gamma 3% / 3mm: {log.fluence.gamma.pass_prcnt}%")
+
+        gamma_fluence_array = log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
         buffer = plot_heatmaps_to_buffer(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
         st.image(buffer, caption='Heatmaps of Fluence and Gamma')
         # fig = px.imshow(fluence_array, aspect='equal')
