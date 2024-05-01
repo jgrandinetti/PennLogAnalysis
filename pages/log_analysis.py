@@ -11,35 +11,38 @@ from streamlit_echarts import st_echarts
 
 
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
-    # Calculate the aspect ratio based on the data dimensions
-    data = [calculated_fluence, expected_fluence, gamma]
-    nrows, ncols = data[0].shape  # Assuming all data arrays have the same shape
+    # # Calculate the aspect ratio based on the data dimensions
+    # data = [calculated_fluence, expected_fluence, gamma]
+    # nrows, ncols = data[0].shape  # Assuming all data arrays have the same shape
 
-    # Create a figure with subplots
-    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    # # Create a figure with subplots
+    # fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
-    # Titles for each subplot
-    titles = ['Measured Fluence', 'Expected Fluence', 'Gamma 1% / 1mm']
+    # # Titles for each subplot
+    # titles = ['Measured Fluence', 'Expected Fluence', 'Gamma 1% / 1mm']
 
-    for ax, d, title in zip(axes, data, titles):
-        # Display the heatmap
-        im = ax.imshow(d, cmap='jet', interpolation='nearest', aspect='equal')
+    # for ax, d, title in zip(axes, data, titles):
+    #     # Display the heatmap
+    #     im = ax.imshow(d, cmap='jet', interpolation='nearest', aspect='equal')
 
-        # Set the aspect of the plot to be equal
-        ax.set_aspect(aspect=(ncols / nrows))
+    #     # Set the aspect of the plot to be equal
+    #     ax.set_aspect(aspect=(ncols / nrows))
 
-        # Set title and add colorbar
-        ax.set_title(title)
-        fig.colorbar(im, ax=ax)
+    #     # Set title and add colorbar
+    #     ax.set_title(title)
+    #     fig.colorbar(im, ax=ax)
 
-    # Adjust layout
-    plt.tight_layout()
-    buf = BytesIO()
-    plt.savefig(buf, format='png', bbox_inches='tight')
-    plt.close()
-    buf.seek(0)
+    # # Adjust layout
+    # plt.tight_layout()
+    # buf = BytesIO()
+    # plt.savefig(buf, format='png', bbox_inches='tight')
+    # plt.close()
+    # buf.seek(0)
 
-    return buf
+    # return buf
+
+    fig = px.imshow(calculated_fluence, text_auto=True, aspect="square")
+    st.plotly_chart(fig)
 
 
 
