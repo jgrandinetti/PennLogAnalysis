@@ -169,7 +169,13 @@ def plot_fluence_map():
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
 
+        samp_int = log.header.sampling_interval
+        snaps = log.header.num_snapshots
+        total_time = samp_int * snaps
+        
         st.write(f"sampling_interval: {log.header.sampling_interval}")
+        st.write(f"num_snapshots: {log.header.num_snapshots}")
+        st.write(f"Total time: {total_time}")
         
         log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
         st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
