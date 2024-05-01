@@ -36,22 +36,6 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
 
 
 def create_polar_plot(monitor_units, gantry_angles):
-    # polar = (
-    #     Polar()
-    #     .add(
-    #         "",
-    #         data=list(zip(gantry_angles, monitor_units)),
-    #         angle_data=gantry_angles,
-    #         type_="bar",
-    #         is_selected=False,
-    #     )
-    #     .set_global_opts(
-    #         title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle"),
-    #         polar_opts=opts.PolarOpts(radius="50%", center=["50%", "50%"]),
-    #     )
-    # )
-    # return polar
-
     data = []
     
     for i in range(len(gantry_angles)):
@@ -64,7 +48,7 @@ def create_polar_plot(monitor_units, gantry_angles):
         .add(series_name="Monitor Units", data=data, label_opts=opts.LabelOpts(is_show=False))
         .add_schema(
             angleaxis_opts=opts.AngleAxisOpts(
-                start_angle=0, type_="value", is_clockwise=True
+                start_angle=0, min_=0, max_=360, type_="value", is_clockwise=True
             )
         )
         .set_global_opts(
