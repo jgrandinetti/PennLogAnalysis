@@ -48,10 +48,10 @@ def plot_heatmap(data):
 
 
 
-def mu_calc_plot(data1, data2):
-    data_list1 = data1.tolist()
-    data_list2 = data2.tolist()
-    x_labels = list(range(1, len(data_list1) + 1))
+def mu_calc_plot(mu, gantry):
+    mu_list = mu.tolist()
+    gantry_list = gantry.tolist()
+    x_labels = list(range(1, len(mu_list) + 1))
 
     option = {
         "xAxis": {
@@ -67,7 +67,7 @@ def mu_calc_plot(data1, data2):
             },
             {
                 "type": "value",
-                "name": "Series 2",
+                "name": "Gantry Angle",
                 "nameLocation": "middle",
                 "nameGap": 50,
                 "position": "right"
@@ -75,23 +75,22 @@ def mu_calc_plot(data1, data2):
         ],
         "series": [
             {
-                "data": data_list1,
+                "data": mu_list,
                 "type": "line",
                 "areaStyle": {},
                 "name": "Series 1"
             },
             {
-                "data": data_list2,
+                "data": gantry_list,
                 "type": "line",
                 "yAxisIndex": 1,
                 "name": "Series 2"
             }
         ],
         "legend": {
-            "data": ["Series 1", "Series 2"]
+            "data": ["MU", "Gantry Angle"]
         }
     }
-
     st_echarts(options=option, height="400px")
 
 
