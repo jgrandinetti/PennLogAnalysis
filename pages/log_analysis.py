@@ -46,65 +46,29 @@ from streamlit_echarts import st_echarts
 #     st_echarts(options=option, height="600px")
 
 
-def plot_heatmaps(calculated_fluence, expected_fluence, gamma):
-    options = {
-        "grid": [
-            {"left": '7%', "right": '55%', "top": '10%', "bottom": '10%'},
-            {"left": '35%', "right": '27%', "top": '10%', "bottom": '10%'},
-            {"left": '63%', "right": '7%', "top": '10%', "bottom": '10%'}
-        ],
-        "visualMap": {
-            "show": True,
-            "min": 0,
-            "max": 100,  # Adjust according to your data range
-            "calculable": True,
-            "orient": "horizontal",
-            "left": "center",
-            "bottom": "15%"
-        },
-        "xAxis": [
-            {"gridIndex": 0, "show": False},
-            {"gridIndex": 1, "show": False},
-            {"gridIndex": 2, "show": False}
-        ],
-        "yAxis": [
-            {"gridIndex": 0, "show": False},
-            {"gridIndex": 1, "show": False},
-            {"gridIndex": 2, "show": False}
-        ],
-        "series": [
-            {
-                "name": "Calculated Fluence",
-                "type": "heatmap",
-                "data": convert_to_echarts_data(calculated_fluence),
-                "xAxisIndex": 0,
-                "yAxisIndex": 0,
-                "gridIndex": 0
-            },
-            {
-                "name": "Expected Fluence",
-                "type": "heatmap",
-                "data": convert_to_echarts_data(expected_fluence),
-                "xAxisIndex": 1,
-                "yAxisIndex": 1,
-                "gridIndex": 1
-            },
-            {
-                "name": "Gamma",
-                "type": "heatmap",
-                "data": convert_to_echarts_data(gamma),
-                "xAxisIndex": 2,
-                "yAxisIndex": 2,
-                "gridIndex": 2
-            }
-        ]
-    }
+def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-    st_echarts(options=options, height="600px")
+    # Titles for each subplot
+    titles = ['Calculated Fluence', 'Expected Fluence', 'Gamma']
 
-def convert_to_echarts_data(data):
-    height, width = data.shape
-    return [[j, height - i - 1, int(data[i, j])] for i in range(height) for j in range(width)]
+    # Data for each subplot
+    data = [calculated_fluence, expected_fluence, gamma]
+
+    for ax, d, title in zip(axes, data, titles):
+        heatmap = ax.imshow(d, cmap='hot', interpolation='nearest')
+        ax.set_title(title)
+        fig.colorbar(heatmap, ax=ax)
+
+    plt.tight_layout()
+
+    # Save to buffer
+    buf = BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close()
+    buf.seek(0)
+
+    return buf
 
 
 
@@ -183,7 +147,8 @@ def plot_fluence_map():
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
         gamma_fluence_array = log.fluence.gamma.calc_map(distTA=0.5, doseTA=1, resolution=0.1)
-        plot_heatmaps(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
+        buffer = plot_heatmaps_to_buffer(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
+        st.image(buffer, caption='Heatmaps of Fluence and Gamma')
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
