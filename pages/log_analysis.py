@@ -49,21 +49,47 @@ def plot_heatmap(data):
 
 
 def mu_calc_plot(data):
-    data_list = data.tolist()
-    x_labels = list(range(1, len(data_list) + 1))
+    data_list1 = data1.tolist()
+    data_list2 = data2.tolist()
+    x_labels = list(range(1, len(data_list1) + 1))
 
     option = {
         "xAxis": {
             "type": "category",
             "data": x_labels,
         },
-        "yAxis": {
-            "type": "value",
-            "name": "MU",
-            "nameLocation": "middle",
-            "nameGap": 50
-        },
-        "series": [{"data": data_list, "type": "line", "areaStyle": {}}],
+        "yAxis": [
+            {
+                "type": "value",
+                "name": "MU",
+                "nameLocation": "middle",
+                "nameGap": 50
+            },
+            {
+                "type": "value",
+                "name": "Series 2",
+                "nameLocation": "middle",
+                "nameGap": 50,
+                "position": "right"
+            }
+        ],
+        "series": [
+            {
+                "data": data_list1,
+                "type": "line",
+                "areaStyle": {},
+                "name": "Series 1"
+            },
+            {
+                "data": data_list2,
+                "type": "line",
+                "yAxisIndex": 1,
+                "name": "Series 2"
+            }
+        ],
+        "legend": {
+            "data": ["Series 1", "Series 2"]
+        }
     }
 
     st_echarts(options=option, height="400px")
@@ -95,9 +121,9 @@ def plot_fluence_map():
 def plot_mu_calc():
     if "log" in st.session_state:
         log = st.session_state.log
-        # mu_calc = log.axis_data.mu.actual
-        mu_calc = log.axis_data.gantry.actual
-        mu_calc_plot(mu_calc)
+        mu_calc = log.axis_data.mu.actual
+        gantry_angle = log.axis_data.gantry.actual
+        mu_calc_plot(mu_calc, gantry_angle)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
