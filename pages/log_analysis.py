@@ -170,7 +170,8 @@ def log_info():
 
         st.write(" ")
         st.write(" ")
-        st.write("\n Log Information \n")
+        st.markdown("<h1 style='text-align: center;'>Log Information</h1>", unsafe_allow_html=True)
+
 
         # No. of beams
         st.write(f"No. of beams: {log.header.num_subbeams}")
