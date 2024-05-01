@@ -66,27 +66,32 @@ def mu_calc_plot(mu, gantry):
         "yAxis": [
             {
                 "type": "value",
-                "name": "Values",
+                "name": "MU",
                 "nameLocation": "middle",
                 "nameGap": 50
+            },
+            {
+                "type": "value",
+                "name": "Gantry Angle",
+                "nameLocation": "middle",
+                "nameGap": 50,
+                "position": "right"
             }
         ],
         "series": [
             {
                 "data": mu_list,
                 "type": "line",
-                "stack": "total",  # Stack identifier
-                "areaStyle": {},  # Fill the area under the line
+                "areaStyle": {},
                 "name": "MU",
-                "color": "#FF0000"
+                "color": "#2980b9"
             },
             {
                 "data": gantry_list,
                 "type": "line",
-                "stack": "total",  # Stack identifier
-                "areaStyle": {},  # Fill the area under the line
+                "yAxisIndex": 1,
                 "name": "Gantry Angle",
-                "color": "#0000FF"
+                "color": "#e74c3c"
             }
         ],
         "legend": {
