@@ -119,7 +119,7 @@ def plot_fluence_map():
         expected_fluence_array = log.fluence.expected.calc_map()
 
         # st.write(f"Treatment type: {log.TreatmentType()}")
-        st.write(f"Patient Name: {log.axis_data.header.patient_name}")
+        st.write(f"Patient Name: {log.header.patient_name}")
         
         log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
         st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
