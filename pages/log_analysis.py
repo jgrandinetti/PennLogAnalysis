@@ -27,6 +27,7 @@ def plot_fluence_map():
 
         plt.figure()
         log.fluence.actual.calc_map()
+        st.write(log.fluence.actual.calc_map())
         log.fluence.actual.plot_map()
         buf = BytesIO()
         plt.savefig(buf, format='png')
