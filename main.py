@@ -23,18 +23,14 @@ add_indentation()
 show_pages(
     [
         Page("main.py", "Home"),
-
-	# Chat Models
-        # Section("Log Analysis"),
-        Page("pages/log_analysis.py", "Log Analysis", in_section=True),
-        Page("pages/plot.py", "Plot Test", in_section=True),
+        Page("pages/log_analysis.py", "Log Analysis"),
     ]
 )
 
 
 
 st.markdown("""
-    <h1 style='text-align: center; font-size: 30px;'>Penn LINAC Dashboard</h1>
+    <h1 style='text-align: center;'>Penn Log File Dashboard</h1>
     """, unsafe_allow_html=True)
 st.write(" ")
 st.write(" ")
