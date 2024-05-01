@@ -9,18 +9,18 @@ import plotly.express as px
 import numpy as np
 from streamlit_echarts import st_echarts
 
-
-option = {
-    "xAxis": {
-        "type": "category",
-        "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    "yAxis": {"type": "value"},
-    "series": [{"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}],
-}
-st_echarts(
-    options=option, height="400px",
-)
+def plot_heatmap(data):
+    option = {
+        "xAxis": {
+            "type": "category",
+            "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        },
+        "yAxis": {"type": "value"},
+        "series": [{"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}],
+    }
+    st_echarts(
+        options=option, height="400px",
+    )
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
@@ -42,7 +42,7 @@ def plot_fluence_map():
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
         # plot_heatmap(fluence_array)
-        plot_heatmap()
+        plot_heatmap(fluence_array)
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
