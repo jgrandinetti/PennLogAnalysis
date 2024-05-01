@@ -59,7 +59,7 @@ def create_polar_plot(monitor_units, gantry_angles):
         r = 5 * (1 + math.sin(theta / 180 * math.pi))
         data.append([r, theta])
     
-    (
+    c = (
         Polar()
         .add(series_name="line", data=data, label_opts=opts.LabelOpts(is_show=False))
         .add_schema(
@@ -73,6 +73,7 @@ def create_polar_plot(monitor_units, gantry_angles):
         )
         .render("two_value_axes_in_polar.html")
     )
+    st_pyecharts(c)
 
 
 
@@ -172,8 +173,7 @@ def plot_mu_calc():
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
         
-        polar_plot = create_polar_plot(mu_calc, gantry_angle)
-        st_pyecharts(polar_plot)
+        create_polar_plot(mu_calc, gantry_angle)
         # plt.figure()
         # log.axis_data.mu.plot_actual()
         # buf = BytesIO()
