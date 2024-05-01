@@ -19,7 +19,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
     # Titles for each subplot
-    titles = ['Measured Fluence', 'Expected Fluence', 'Gamma 2% / 2mm']
+    titles = ['Measured Fluence', 'Expected Fluence', 'Gamma 1% / 1mm']
 
     for ax, d, title in zip(axes, data, titles):
         # Display the heatmap
@@ -117,15 +117,13 @@ def plot_fluence_map():
         log = st.session_state.log
         calc_fluence_array = log.fluence.actual.calc_map()
         expected_fluence_array = log.fluence.expected.calc_map()
-        
-        gamma_11 = log.fluence.gamma.calc_map(distTA=0.02, doseTA=0.02, resolution=0.1)
-        st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
-        gamma_22 = log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
-        st.write(f"Gamma 2% / 2mm: {log.fluence.gamma.pass_prcnt}%")
-        gamma_33 = log.fluence.gamma.calc_map(distTA=3, doseTA=3, resolution=0.1)
-        st.write(f"Gamma 3% / 3mm: {log.fluence.gamma.pass_prcnt}%")
 
-        gamma_fluence_array = log.fluence.gamma.calc_map(distTA=2, doseTA=2, resolution=0.1)
+        log.fluence.gamma.calc_map(distTA=0.1, doseTA=0.1, resolution=0.1)
+        st.write(f"Gamma 0.1% / 0.1mm: {log.fluence.gamma.pass_prcnt}%")
+        log.fluence.gamma.calc_map(distTA=0.02, doseTA=0.02, resolution=0.1)
+        st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
+
+        gamma_fluence_array = log.fluence.gamma.calc_map(distTA=1, doseTA=1, resolution=0.1)
         buffer = plot_heatmaps_to_buffer(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
         st.image(buffer, caption='Heatmaps of Fluence and Gamma')
         # fig = px.imshow(fluence_array, aspect='equal')
