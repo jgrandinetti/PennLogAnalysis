@@ -11,37 +11,21 @@ from streamlit_echarts import st_echarts
 
 
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
-    # # Calculate the aspect ratio based on the data dimensions
-    # data = [calculated_fluence, expected_fluence, gamma]
-    # nrows, ncols = data[0].shape  # Assuming all data arrays have the same shape
+    fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"))
 
-    # # Create a figure with subplots
-    # fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    # Plot calculated fluence heatmap
+    trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", colorscale="jet")
+    fig.add_trace(trace1.data[0], row=1, col=1)
 
-    # # Titles for each subplot
-    # titles = ['Measured Fluence', 'Expected Fluence', 'Gamma 1% / 1mm']
+    # Plot expected fluence heatmap
+    trace2 = px.imshow(expected_fluence, text_auto=True, aspect="square", colorscale="jet")
+    fig.add_trace(trace2.data[0], row=1, col=2)
 
-    # for ax, d, title in zip(axes, data, titles):
-    #     # Display the heatmap
-    #     im = ax.imshow(d, cmap='jet', interpolation='nearest', aspect='equal')
+    # Plot gamma heatmap
+    trace3 = px.imshow(gamma, text_auto=True, aspect="square", colorscale="jet")
+    fig.add_trace(trace3.data[0], row=1, col=3)
 
-    #     # Set the aspect of the plot to be equal
-    #     ax.set_aspect(aspect=(ncols / nrows))
-
-    #     # Set title and add colorbar
-    #     ax.set_title(title)
-    #     fig.colorbar(im, ax=ax)
-
-    # # Adjust layout
-    # plt.tight_layout()
-    # buf = BytesIO()
-    # plt.savefig(buf, format='png', bbox_inches='tight')
-    # plt.close()
-    # buf.seek(0)
-
-    # return buf
-
-    fig = px.imshow(calculated_fluence, text_auto=True, aspect="square")
+    fig.update_layout(height=500, width=1000, title_text="Heatmaps")
     st.plotly_chart(fig)
 
 
@@ -130,8 +114,8 @@ def plot_fluence_map():
         st.write(f"Gamma 1% / 1mm: {log.fluence.gamma.pass_prcnt}%")
 
         gamma_fluence_array = log.fluence.gamma.calc_map(distTA=1, doseTA=1, resolution=0.1)
-        buffer = plot_heatmaps_to_buffer(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
-        st.image(buffer, caption='Heatmaps of Fluence and Gamma')
+        plot_heatmaps_to_buffer(calc_fluence_array, expected_fluence_array, gamma_fluence_array)
+        # st.image(buffer, caption='Heatmaps of Fluence and Gamma')
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
