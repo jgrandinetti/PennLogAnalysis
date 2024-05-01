@@ -32,6 +32,7 @@ def plot_fluence_map():
     #                ], dtype=np.uint8)
     fluence_array = log.fluence.actual.calc_map()
     fig = px.imshow(fluence_array)
+    fig.update_layout(xaxis=dict(scaleanchor="y", constrain="domain"), yaxis=dict(constrain="domain"))
     st.plotly_chart(fig)
 
         # plt.figure()
