@@ -48,7 +48,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     st.plotly_chart(fig)
 
 
-def create_polar_plot(monitor_units, gantry_angles, step=10):
+def create_polar_plot(monitor_units, gantry_angles, target_degree_change=1):
     # data = []
     # for i in range(0, len(gantry_angles) - step, step):
     #     theta = round(gantry_angles[i], 2)
@@ -228,7 +228,7 @@ def plot_mu_calc():
         mu_calc = log.axis_data.mu.actual
         gantry_angle = log.axis_data.gantry.actual
         mu_calc_plot(mu_calc, gantry_angle)
-        create_polar_plot(mu_calc, gantry_angle, step=25)
+        create_polar_plot(mu_calc, gantry_angle, target_degree_change=1)
 
 uploaded_file = st.file_uploader("Upload log file", type=['bin'], on_change=save_uploaded_file, args=(st.session_state.get('uploaded_file', None),))
 
