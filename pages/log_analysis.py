@@ -38,7 +38,7 @@ def plot_heatmap(data):
         }],
         "tooltip": {
             "trigger": "item",
-            "formatter": "Pixel Value: {c}"
+            "formatter": "Pixel Value: {c[2]}"
         }
     }
 
