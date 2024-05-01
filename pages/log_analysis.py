@@ -104,25 +104,52 @@ def mu_calc_plot(mu, gantry):
             "trigger": 'axis',
             "axisPointer": {
                 "type": 'line'
+            },
+            "textStyle": {
+                "color": 'white'  # Set tooltip text color to white
             }
         },
         "xAxis": {
             "type": "category",
             "data": x_labels,
+            "axisLabel": {
+                "color": 'white'  # Set x-axis label color to white
+            },
+            "axisLine": {
+                "lineStyle": {
+                    "color": 'white'  # Set x-axis line color to white
+                }
+            }
         },
         "yAxis": [
             {
                 "type": "value",
                 "name": "MU",
                 "nameLocation": "middle",
-                "nameGap": 50
+                "nameGap": 50,
+                "axisLabel": {
+                    "color": 'white'  # Set y-axis label color to white
+                },
+                "axisLine": {
+                    "lineStyle": {
+                        "color": 'white'  # Set y-axis line color to white
+                    }
+                }
             },
             {
                 "type": "value",
                 "name": "Gantry Angle",
                 "nameLocation": "middle",
                 "nameGap": 50,
-                "position": "right"
+                "position": "right",
+                "axisLabel": {
+                    "color": 'white'  # Set y-axis label color to white
+                },
+                "axisLine": {
+                    "lineStyle": {
+                        "color": 'white'  # Set y-axis line color to white
+                    }
+                }
             }
         ],
         "series": [
@@ -144,10 +171,14 @@ def mu_calc_plot(mu, gantry):
             }
         ],
         "legend": {
-            "data": ["MU", "Gantry Angle"]
+            "data": ["MU", "Gantry Angle"],
+            "textStyle": {
+                "color": 'white'  # Set legend text color to white
+            }
         }
     }
     st_echarts(options=option, height="400px")
+
 
 
 
