@@ -53,6 +53,12 @@ def mu_calc_plot(mu, gantry):
     x_labels = list(range(1, len(mu_list) + 1))
 
     option = {
+        "tooltip": {
+            "trigger": 'axis',
+            "axisPointer": {
+                "type": 'line'  # Shows a vertical line across the chart when hovering
+            }
+        },
         "xAxis": {
             "type": "category",
             "data": x_labels,
@@ -60,32 +66,27 @@ def mu_calc_plot(mu, gantry):
         "yAxis": [
             {
                 "type": "value",
-                "name": "MU",
+                "name": "Values",
                 "nameLocation": "middle",
                 "nameGap": 50
-            },
-            {
-                "type": "value",
-                "name": "Gantry Angle",
-                "nameLocation": "middle",
-                "nameGap": 50,
-                "position": "right"
             }
         ],
         "series": [
             {
                 "data": mu_list,
                 "type": "line",
-                "areaStyle": {},
+                "stack": "total",  # Stack identifier
+                "areaStyle": {},  # Fill the area under the line
                 "name": "MU",
-                "color": "#2980b9"
+                "color": "#FF0000"
             },
             {
                 "data": gantry_list,
                 "type": "line",
-                "yAxisIndex": 1,
+                "stack": "total",  # Stack identifier
+                "areaStyle": {},  # Fill the area under the line
                 "name": "Gantry Angle",
-                "color": "#e74c3c"
+                "color": "#0000FF"
             }
         ],
         "legend": {
