@@ -10,19 +10,20 @@ import numpy as np
 from streamlit_echarts import st_echarts
 
 def plot_heatmap(data):
+    height, width = data.shape
+    
+    # Calculate the aspect ratio of the data
+    aspect_ratio = width / height
+    
+    # Set the chart size based on the aspect ratio
+    chart_width = 600
+    chart_height = int(chart_width / aspect_ratio)
+    
     option = {
-        "xAxis": {
-            "show": False,
-            "type": 'category',
-            "data": list(range(data.shape[1]))
-        },
-        "yAxis": {
-            "show": False,
-            "type": 'category',
-            "data": list(range(data.shape[0]))
-        },
+        "xAxis": {"show": False},
+        "yAxis": {"show": False},
         "visualMap": {
-            "show": True,
+            "show": False,
             "min": int(data.min()),
             "max": int(data.max()),
             "inRange": {
@@ -40,28 +41,15 @@ def plot_heatmap(data):
             },
             "progressive": 1000,
             "animation": False
-        }],
-        "grid": {
-            "left": '5%',
-            "right": '5%',
-            "bottom": '5%',
-            "top": '5%',
-            "containLabel": True
-        }
+        }]
     }
 
     # Convert the NumPy array to the format required by ECharts
-    height, width = data.shape
     for i in range(height):
         for j in range(width):
             option["series"][0]["data"].append([j, height - i - 1, int(data[i, j])])
 
-    # Calculate the aspect ratio and set the height dynamically
-    aspect_ratio = height / width
-    chart_height = 500  # You can adjust this value based on your preference
-    chart_width = int(chart_height / aspect_ratio)
-
-    st_echarts(options=option)
+    st_echarts(options=option, width=str(chart_width) + "px", height=str(chart_height) + "px")
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
