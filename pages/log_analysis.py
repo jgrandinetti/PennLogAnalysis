@@ -20,42 +20,31 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
                            shared_yaxes=True, horizontal_spacing=0.02)
 
     # Plot calculated fluence
-    trace1 = go.Heatmap(
-        z=calculated_fluence, 
-        colorscale='Jet', 
-        hovertemplate='%{z}<extra></extra>'
-    )
+    trace1 = go.Heatmap(z=calculated_fluence, colorscale='Jet', hovertemplate='%{z}<extra></extra>')
     fig.add_trace(trace1, row=1, col=1)
 
     # Plot expected fluence
-    trace2 = go.Heatmap(
-        z=expected_fluence, 
-        colorscale='Jet', 
-        hovertemplate='%{z}<extra></extra>'
-    )
+    trace2 = go.Heatmap(z=expected_fluence, colorscale='Jet', hovertemplate='%{z}<extra></extra>')
     fig.add_trace(trace2, row=1, col=2)
 
     # Plot gamma
-    trace3 = go.Heatmap(
-        z=gamma, 
-        colorscale='Jet', 
-        hovertemplate='%{z}<extra></extra>'
-    )
+    trace3 = go.Heatmap(z=gamma, colorscale='Jet', hovertemplate='%{z}<extra></extra>')
     fig.add_trace(trace3, row=1, col=3)
 
-    fig.update_layout(height=380, width=680, title_text="Heatmaps")
+    # Update layout with white text
+    fig.update_layout(
+        height=380, width=680, title_text="Heatmaps",
+        title_font=dict(color='white'),
+        font=dict(color='white'),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     fig.update_traces(showscale=False)
     st.plotly_chart(fig)
 
 
-def create_polar_plot(monitor_units, gantry_angles, target_degree_change=1):
-    # data = []
-    # for i in range(0, len(gantry_angles) - step, step):
-    #     theta = round(sum(gantry_angles[i:i+step]) / step, 2)
-    #     r = sum(monitor_units[j+1] - monitor_units[j] for j in range(i, i + step))
-    #     r = round(r, 2)
-    #     data.append([r, theta])
 
+def create_polar_plot(monitor_units, gantry_angles, target_degree_change=1):
     data = []
     degree_change_per_index = 360 / (len(gantry_angles) - 1)
     step = max(1, int(round(target_degree_change / degree_change_per_index)))
@@ -87,15 +76,17 @@ def create_polar_plot(monitor_units, gantry_angles, target_degree_change=1):
                 interval=90,
                 boundary_gap=False,
                 axistick_opts=opts.AxisTickOpts(is_show=False),
-                axislabel_opts=opts.LabelOpts(formatter="{value}°"),
+                axislabel_opts=opts.LabelOpts(formatter="{value}°", color='white'),
             )
         )
         .set_global_opts(
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
-            title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle"),
+            title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle", title_textstyle_opts=opts.TextStyleOpts(color='white')),
+            legend_opts=opts.LegendOpts(textstyle_opts=opts.TextStyleOpts(color='white'))
         )
     )
     st_pyecharts(c, height="600px", width="800px")
+
 
 
 
