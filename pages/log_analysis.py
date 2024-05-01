@@ -59,7 +59,7 @@ def create_polar_plot(monitor_units, gantry_angles, step=10):
     c = (
         Polar()
         .add(
-            series_name="Monitor Units Difference",
+            series_name="MU (Insert arc info later)",
             data=data,
             label_opts=opts.LabelOpts(is_show=False),
             symbol="none",
