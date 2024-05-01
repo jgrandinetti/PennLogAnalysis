@@ -17,12 +17,15 @@ z = [[.1, .3, .5, .7, .9],
 
 fig = px.imshow(z, text_auto=True)
 
-# Set the aspect ratio to be equal
+# Update layout to maintain equal aspect ratio
 fig.update_layout(
-    xaxis=dict(scaleanchor="y", scaleratio=1),
-    yaxis=dict(constrain='domain')  # This ensures that the scale ratio is maintained
+    autosize=False,
+    width=500,  # Adjust width to your preference
+    height=500,  # Adjust height to match the width or according to your data aspect ratio
+    margin=dict(l=20, r=20, t=20, b=20),
 )
 
 st.plotly_chart(fig)
+
 
 
