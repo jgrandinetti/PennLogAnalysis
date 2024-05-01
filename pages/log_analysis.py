@@ -84,7 +84,7 @@ def mu_calc_plot(mu, gantry):
                 "type": "line",
                 "areaStyle": {},
                 "name": "MU",
-                "color": "#2980b9"
+                "color": "#3498db"
             },
             {
                 "data": gantry_list,
