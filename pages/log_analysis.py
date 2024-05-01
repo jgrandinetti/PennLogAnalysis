@@ -54,14 +54,14 @@ def create_polar_plot(monitor_units, gantry_angles):
 
     data = []
     
-    for i in range(0, 101):
-        theta = i / 100 * 360
-        r = 5 * (1 + math.sin(theta / 180 * math.pi))
+    for i in range(len(gantry_angles)):
+        theta = gantry_angles[i]
+        r = monitor_units[i]
         data.append([r, theta])
     
     c = (
         Polar()
-        .add(series_name="line", data=data, label_opts=opts.LabelOpts(is_show=False))
+        .add(series_name="Monitor Units", data=data, label_opts=opts.LabelOpts(is_show=False))
         .add_schema(
             angleaxis_opts=opts.AngleAxisOpts(
                 start_angle=0, type_="value", is_clockwise=True
@@ -69,7 +69,7 @@ def create_polar_plot(monitor_units, gantry_angles):
         )
         .set_global_opts(
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
-            title_opts=opts.TitleOpts(title="极坐标双数值轴"),
+            title_opts=opts.TitleOpts(title="Monitor Units vs Gantry Angle"),
         )
     )
     st_pyecharts(c)
