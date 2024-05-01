@@ -14,7 +14,7 @@ def plot_heatmap(data):
         "xAxis": {"show": False},
         "yAxis": {"show": False},
         "visualMap": {
-            "show": False,
+            "show": True,
             "min": int(data.min()),
             "max": int(data.max()),
             "inRange": {
@@ -31,7 +31,7 @@ def plot_heatmap(data):
                 }
             },
             "progressive": 1000,
-            "animation": False
+            "animation": True
         }]
     }
 
