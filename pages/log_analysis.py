@@ -182,6 +182,9 @@ def log_info():
         total_time = round(((samp_int * snaps) / 60000), 2)
         st.write(f"Total time: {total_time} min")
 
+        # MLC Errors
+        st.write(f"MLC 95% Error: {log.axis_data.mlc.get_error_percentile(percentile=95)}")
+
 
 def plot_fluence_map():
     if "log" in st.session_state:
