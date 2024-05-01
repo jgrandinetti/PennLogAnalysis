@@ -18,7 +18,7 @@ import math
 def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"))
     
-    trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", color_continuous_scale='jet', range_color=[0, 10])
+    trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", color_continuous_scale='jet')
     fig.add_trace(trace1.data[0], row=1, col=1)
     
     # Plot expected fluence heatmap
@@ -29,7 +29,7 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     trace3 = px.imshow(gamma, text_auto=True, aspect="square", color_continuous_scale="jet")
     fig.add_trace(trace3.data[0], row=1, col=3)
     
-    fig.update_layout(height=380, width=800, title_text="Heatmaps")
+    fig.update_layout(height=380, width=800, title_text="Heatmaps", color_continuous_scale='jet')
     st.plotly_chart(fig)
 
 
