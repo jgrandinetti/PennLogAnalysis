@@ -49,7 +49,8 @@ def plot_heatmap(data):
     chart_height = height * 10
 
     # Display the chart using Streamlit
-    st_echarts(option, height=chart_height, width=chart_width)
+    # st_echarts(option, height=chart_height, width=chart_width)
+    st_echarts(option)
 
 
 def save_uploaded_file(uploaded_file):
