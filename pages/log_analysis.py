@@ -39,15 +39,27 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
                            shared_yaxes=True, horizontal_spacing=0.02)
 
     # Plot calculated fluence heatmap
-    trace1 = go.Heatmap(z=calculated_fluence, colorscale='Jet', hoverinfo='none')
+    trace1 = go.Heatmap(
+        z=calculated_fluence, 
+        colorscale='Jet', 
+        hovertemplate='%{z}<extra></extra>'  # Display only z-value
+    )
     fig.add_trace(trace1, row=1, col=1)
 
     # Plot expected fluence heatmap
-    trace2 = go.Heatmap(z=expected_fluence, colorscale='Jet', hoverinfo='none')
+    trace2 = go.Heatmap(
+        z=expected_fluence, 
+        colorscale='Jet', 
+        hovertemplate='%{z}<extra></extra>'  # Display only z-value
+    )
     fig.add_trace(trace2, row=1, col=2)
 
     # Plot gamma heatmap
-    trace3 = go.Heatmap(z=gamma, colorscale='Jet', hoverinfo='none')
+    trace3 = go.Heatmap(
+        z=gamma, 
+        colorscale='Jet', 
+        hovertemplate='%{z}<extra></extra>'  # Display only z-value
+    )
     fig.add_trace(trace3, row=1, col=3)
 
     # Update layout
