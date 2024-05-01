@@ -63,7 +63,7 @@ def plot_fluence_map():
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
         data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-        plot_heatmap(data)
+        plot_heatmap(fluence_array)
         # fig = px.imshow(fluence_array, aspect='equal')
         # st.plotly_chart(fig)
 
