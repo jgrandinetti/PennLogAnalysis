@@ -170,7 +170,7 @@ def log_info():
 
         st.write(" ")
         st.write(" ")
-        st.markdown("<h1 style='text-align: center;'>Log Information</h1>", unsafe_allow_html=True)
+        st.markdown("<h4 style='text-align: center;'>Log Information</h4>", unsafe_allow_html=True)
 
 
         # No. of beams
