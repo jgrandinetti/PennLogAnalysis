@@ -78,14 +78,14 @@ def mu_calc_plot(mu, gantry):
                 "type": "line",
                 "areaStyle": {},
                 "name": "MU",
-                "color": "#FF0000"  # Red color for the MU series
+                "color": "#2980b9"
             },
             {
                 "data": gantry_list,
                 "type": "line",
                 "yAxisIndex": 1,
                 "name": "Gantry Angle",
-                "color": "#0000FF"  # Blue color for the Gantry Angle series
+                "color": "#e74c3c"
             }
         ],
         "legend": {
