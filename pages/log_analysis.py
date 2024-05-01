@@ -7,6 +7,50 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import plotly.express as px
 import numpy as np
+import streamlit_echarts as st_echarts
+
+
+# ------- Functions --------- #
+def plot_heatmap(data):
+    # Create the ECharts option
+    option = {
+        "xAxis": {"show": False},
+        "yAxis": {"show": False},
+        "visualMap": {
+            "show": False,
+            "min": int(data.min()),
+            "max": int(data.max()),
+            "inRange": {
+                "color": ["#000000", "#FFFFFF"]
+            }
+        },
+        "series": [{
+            "type": "heatmap",
+            "data": [],
+            "emphasis": {
+                "itemStyle": {
+                    "borderColor": "#333",
+                    "borderWidth": 1
+                }
+            },
+            "progressive": 1000,
+            "animation": False
+        }]
+    }
+
+    # Convert the NumPy array to the format required by ECharts
+    height, width = data.shape
+    for i in range(height):
+        for j in range(width):
+            option["series"][0]["data"].append([j, i, int(data[i, j])])
+
+    # Set the chart width and height based on the data dimensions
+    chart_width = width * 10
+    chart_height = height * 10
+
+    # Display the chart using Streamlit
+    st_echarts(option, height=chart_height, width=chart_width)
+
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
@@ -27,8 +71,9 @@ def plot_fluence_map():
     if "log" in st.session_state:
         log = st.session_state.log
         fluence_array = log.fluence.actual.calc_map()
-        fig = px.imshow(fluence_array, aspect='equal')
-        st.plotly_chart(fig)
+        plot_heatmap(fluence_array)
+        # fig = px.imshow(fluence_array, aspect='equal')
+        # st.plotly_chart(fig)
 
 def plot_mu_calc():
     if "log" in st.session_state:
