@@ -15,15 +15,15 @@ def plot_heatmaps_to_buffer(calculated_fluence, expected_fluence, gamma):
     fig = sp.make_subplots(rows=1, cols=3, subplot_titles=("Calculated Fluence", "Expected Fluence", "Gamma"))
 
     # Plot calculated fluence heatmap
-    trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", colorscale="jet")
+    trace1 = px.imshow(calculated_fluence, text_auto=True, aspect="square", color_continuous_scale="jet")
     fig.add_trace(trace1.data[0], row=1, col=1)
 
     # Plot expected fluence heatmap
-    trace2 = px.imshow(expected_fluence, text_auto=True, aspect="square", colorscale="jet")
+    trace2 = px.imshow(expected_fluence, text_auto=True, aspect="square", color_continuous_scale="jet")
     fig.add_trace(trace2.data[0], row=1, col=2)
 
     # Plot gamma heatmap
-    trace3 = px.imshow(gamma, text_auto=True, aspect="square", colorscale="jet")
+    trace3 = px.imshow(gamma, text_auto=True, aspect="square", color_continuous_scale="jet")
     fig.add_trace(trace3.data[0], row=1, col=3)
 
     fig.update_layout(height=500, width=1000, title_text="Heatmaps")
